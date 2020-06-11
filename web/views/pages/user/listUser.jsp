@@ -66,12 +66,13 @@
                                     %>
                                     </tr>
                                 <td><%= userData.getIdusuario()%></td>
+                                sdkfslfñklñ
                                 <td><%= userData.getNumerodocumento()%></td>
                                 <td><%= userData.getIdrol() == "1" ? "Admin" : userData.getIdrol() == "2" ? "Turista" : "Propietario"%></td>
                                 <td><%= userData.getNombre() + " " + userData.getApellido()%></td>
                                 <td><%= userData.getCorreo()%></td>
                                 <td><%= userData.getCelular()%></td>
-                                <td><img src="<%= userData.getImagen() == "" ? "" : "./libs/dist/img/avatar5.png"%>" class="img-circle img-size-75"></td>
+                                <td><img src="<%= userData.getImagen() == "" ? "" : "./libs/dist/img/avatar5.png"%>" class="img-circle img-size-50"></td>
                                 <td >
                                     <div class="d-flex align-content-center">
                                         <a href="user?action=getById&id=<%=userData.getIdusuario()%>" class="btn btn-default" ><i class="fas fa-edit"></i></a>
