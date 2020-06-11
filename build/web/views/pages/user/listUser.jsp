@@ -66,7 +66,6 @@
                                     %>
                                     </tr>
                                 <td><%= userData.getIdusuario()%></td>
-                                sdkfslfñklñ
                                 <td><%= userData.getNumerodocumento()%></td>
                                 <td><%= userData.getIdrol() == "1" ? "Admin" : userData.getIdrol() == "2" ? "Turista" : "Propietario"%></td>
                                 <td><%= userData.getNombre() + " " + userData.getApellido()%></td>
