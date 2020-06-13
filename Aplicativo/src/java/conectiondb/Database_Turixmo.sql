@@ -162,5 +162,4 @@ INSERT INTO tiposhabitacion VALUES 	(null,"Individual Sencilla","Una habitación
                                     (null,"Quad","Una sala asignada a cuatro personas. Puede tener dos o más camas."),
                                     (null,"Queen","Una habitación con una cama de matrimonio. Puede ser ocupado por una o más personas."),
                                     (null,"King","Una habitación con una cama king-size. Puede ser ocupado por una o más personas"),
-                                    (null,"Quad","Una habitación con dos camas. Puede ser ocupado por una o más personas."),
                                     (null,"Estudio","una habitación con una cama de estudio, un sofá que se puede convertir en una cama. También puede tener una cama adicional.");
