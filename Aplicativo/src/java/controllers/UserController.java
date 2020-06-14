@@ -100,19 +100,21 @@ public class UserController extends HttpServlet {
         String idusuario = null;
         String idtipodocumento = request.getParameter("tipo-documento");
         String numerodocumento = request.getParameter("numero-documento");
+        String idpais = "1";
         String idrol = request.getParameter("rol");
         String nombre = request.getParameter("nombre");
         String apellido = request.getParameter("apellido");
         String correo = request.getParameter("correo");
         String contrasena = request.getParameter("contrasena");
         String celular = request.getParameter("celular");
+        String genero = null;
         String token = null;
         String imagen = null;
         String fechanacimiento = request.getParameter("fecha-nacimiento");
         String fechacreacion = "2020-06-10 01:40:50";
 
-        User userData = new User(idusuario, idtipodocumento, numerodocumento, idrol, nombre,
-                apellido, correo, contrasena, celular, token, imagen, fechanacimiento, fechacreacion);
+        User userData = new User(idusuario, idtipodocumento, numerodocumento,idpais, idrol, nombre,
+                apellido, correo, contrasena, celular,genero, token, imagen, fechanacimiento, fechacreacion);
         UserModel user = new UserModel(userData);
         String message = null, type = null;
         if (user.registerUser()) {
@@ -147,19 +149,21 @@ public class UserController extends HttpServlet {
         int idusuario = Integer.parseInt(request.getParameter("id"));
         String idtipodocumento = request.getParameter("tipo-documento");
         String numerodocumento = null;
+        String idpais = "1";
         String idrol = request.getParameter("rol");
         String nombre = request.getParameter("nombre");
         String apellido = request.getParameter("apellido");
         String correo = request.getParameter("correo");
         String contrasena = null;
         String celular = request.getParameter("celular");
+               String genero = null;
         String token = null;
         String imagen = null;
         String fechanacimiento = request.getParameter("fecha-nacimiento");
         String fechacreacion = null;
 
-        User userData = new User(String.valueOf(idusuario), idtipodocumento, numerodocumento, idrol, nombre,
-                apellido, correo, contrasena, celular, token, imagen, fechanacimiento, fechacreacion);
+        User userData = new User(String.valueOf(idusuario), idtipodocumento, numerodocumento,idpais, idrol, nombre,
+                apellido, correo, contrasena, celular, token,genero, imagen, fechanacimiento, fechacreacion);
         UserModel user = new UserModel(userData);
         String message = null, type = null;
         if (user.updateUserById(idusuario)) {

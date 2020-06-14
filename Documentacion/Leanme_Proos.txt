@@ -1,5 +1,0 @@
-La idea de este espacio es para poner todo lo relacionado con documentacion aqui:
-Todo es todo: Y no complicarnos la vida con el drive y demas.
-
-- Entonces por favor agregar lo que falta aqui...
-- Ah y pueden editar lo que quieran, con solo hacer push ya los cambios quedan. Listos!
