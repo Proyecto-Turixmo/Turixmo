@@ -72,7 +72,8 @@
                                 <input type="password" class="form-control" name="contrasena" id="contrasena" placeholder="********" required="on"/>
                             </div>
                         </div>
-                        <a href="#" class="btn btn-primary btn-block">Registrarme!</a>
+                        <a href="#" class="btn btn-primary btn-block">Registrarme!</a><br>
+                       
                     </form>
 
                 </div>
