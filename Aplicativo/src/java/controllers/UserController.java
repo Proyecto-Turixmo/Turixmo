@@ -1,172 +1,132 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Enumeration;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import models.dao.UserModel;
-import models.vo.User;
+import models.UserModel;
+import vo.UserVO;
 
-/**
- *
- * @author andre
- */
-@WebServlet(name = "UserController", urlPatterns = {"/user"})
+@WebServlet(name = "UserController",
+        urlPatterns = {"/UserNew", "/UserGetall", "/UserGetbyid",
+             "/UserCreate", "/UserUpdate", "/UserDelete"})
+
 public class UserController extends HttpServlet {
 
+    public String message = null, type = null;
+
     public UserController() {
-       String hola = "";
+        
     }
 
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getParameter("action");
+ 
+        switch (request.getServletPath()) {
+            case "/UserGetall":
+                request.getRequestDispatcher("views/pages/user/list.jsp").forward(request, response);
+                break;
+            case "/UserNew":
+                request.getRequestDispatcher("views/pages/user/create.jsp").forward(request, response);
+                break;
+            case "/UserGetbyid":
+                this.getUserById(request, response);
+                break;
+            default:
+                request.getRequestDispatcher("views/error404.jsp").forward(request, response);
 
-        if (action != null) {
-            switch (action) {
-                case "getall":
-                    request.getRequestDispatcher("views/pages/user/listUser.jsp").forward(request, response); 
-                    break;
-                case "getbyid":
-                    this.getUserById(request,response);
-                    break;
-                case "getbyname":
-                    break;
-                    
-            }
-         }else{
-         
-            request.getRequestDispatcher("views/pages/user/indexUser.jsp").forward(request, response);   
-                                
         }
-   }
-
-        /**
-         * Handles the HTTP <code>POST</code> method.
-         *
-         * @param request servlet request
-         * @param response servlet response
-         * @throws ServletException if a servlet-specific error occurs
-         * @throws IOException if an I/O error occurs
-         */
-        @Override
-        protected void doPost
-        (HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String action = request.getParameter("action");
-        if (action != null) {
-            switch (action) {
-                case "save":
-                    this.registerUser(request, response);
-                    break;
-                case "update":
-                    this.updateUser(request, response);
-                    break;
-                case "delete":
-                    this.deleteUser(request, response);
-                    break;
-                default:
-
-            }
-            }else{
-         
-            request.getRequestDispatcher("views/pages/user/indexUser.jsp").forward(request, response);                      
-        }
-            
     }
 
-    
-
-    private void registerUser(HttpServletRequest request, HttpServletResponse response)
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String result = (String)request.getServletPath();
+        switch (result) {
+            case "/UserCreate":
+                this.create(request, response);
+                break;
+            case "/UserUpdate":
+                this.update(request, response);
+                break;
+            case "/UserDelete":
+                this.delete(request, response);
+                break;
+            default:
+                request.getRequestDispatcher("views/error404.jsp").forward(request, response);
+        }
 
-        String idusuario = null;
-        String idtipodocumento = request.getParameter("tipo-documento");
-        String numerodocumento = request.getParameter("numero-documento");
-        String idpais = "1";
-        String idrol = request.getParameter("rol");
-        String nombre = request.getParameter("nombre");
-        String apellido = request.getParameter("apellido");
-        String correo = request.getParameter("correo");
-        String contrasena = request.getParameter("contrasena");
-        String celular = request.getParameter("celular");
-        String genero = null;
-        String token = null;
-        String imagen = null;
-        String fechanacimiento = request.getParameter("fecha-nacimiento");
-        String fechacreacion = "2020-06-10 01:40:50";
+    }
 
-        User userData = new User(idusuario, idtipodocumento, numerodocumento,idpais, idrol, nombre,
-                apellido, correo, contrasena, celular,genero, token, imagen, fechanacimiento, fechacreacion);
-        UserModel user = new UserModel(userData);
-        String message = null, type = null;
-        if (user.registerUser()) {
-            type = "success";
-            message = "El usuario se ha registrado correctamente";
+    private void create(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        Date fecha = new Date();
+        DateFormat formateador  = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        
+        UserModel user = new UserModel();
+        UserVO userVO = new UserVO();
+        
+        userVO.setIdtipodocumento(request.getParameter("tipoDocumento"));
+        userVO.setNumerodocumento(request.getParameter("numeroDocumento"));
+        userVO.setIdpais("1");
+        userVO.setIdrol(request.getParameter("rol"));
+        userVO.setNombre(request.getParameter("nombre"));
+        userVO.setApellido(request.getParameter("apellido"));
+        userVO.setCorreo(request.getParameter("correo"));
+        userVO.setContrasena(request.getParameter("contrasena"));
+        userVO.setCelular(request.getParameter("celular"));
+        userVO.setFechanacimiento(request.getParameter("fechaNacimiento") == null ? "" : request.getParameter("fechaNacimiento"));
+        userVO.setFecharegistro(formateador.format(fecha));
+
+       
+        if (user.create(userVO)) {
+            this.type = "success";
+            this.message = "El usuario se ha registrado correctamente";
         } else {
-            type = "danger";
-            message = "Lo sentimos el usuario no se puedo registrar";
+            this.type = "danger";
+            this.message = "Lo sentimos el usuario no se puedo registrar";
         }
-        request.setAttribute("message", message);
-        request.setAttribute("type", type);
-        request.getRequestDispatcher("views/pages/user/indexUser.jsp").forward(request, response);
-        
+        request.setAttribute("message", this.message);
+        request.setAttribute("type", this.type);
+        request.getRequestDispatcher("views/pages/user/create.jsp").forward(request, response);
+
     }
-    
-    
-        private void getUserById(HttpServletRequest request, HttpServletResponse response) 
-        throws ServletException,IOException{
-        
+
+    private void getUserById(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
         int iduser = Integer.parseInt(request.getParameter("id"));
         UserModel user = new UserModel();
-        request.setAttribute("user",user.getUserById(iduser));
-        request.getRequestDispatcher("views/pages/user/indexUser.jsp").forward(request, response);
-        
-       
+        request.setAttribute("user", user.getById(iduser));
+        request.getRequestDispatcher("views/pages/user/create.jsp").forward(request, response);
 
     }
-    
-        private void updateUser(HttpServletRequest request, HttpServletResponse response)
+
+    private void update(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        int idusuario = Integer.parseInt(request.getParameter("id"));
-        String idtipodocumento = request.getParameter("tipo-documento");
-        String numerodocumento = null;
-        String idpais = "1";
-        String idrol = request.getParameter("rol");
-        String nombre = request.getParameter("nombre");
-        String apellido = request.getParameter("apellido");
-        String correo = request.getParameter("correo");
-        String contrasena = null;
-        String celular = request.getParameter("celular");
-               String genero = null;
-        String token = null;
-        String imagen = null;
-        String fechanacimiento = request.getParameter("fecha-nacimiento");
-        String fechacreacion = null;
+        
+        UserModel user = new UserModel();
+        UserVO userVO = new UserVO();
+        userVO.setIdusuario(request.getParameter("id"));
+        userVO.setIdtipodocumento(request.getParameter("tipoDocumento"));
+        userVO.setIdrol(request.getParameter("rol"));
+        userVO.setNombre(request.getParameter("nombre"));
+        userVO.setApellido(request.getParameter("apellido"));
+        userVO.setCorreo(request.getParameter("correo"));
+        userVO.setCelular(request.getParameter("celular"));
+        userVO.setFechanacimiento(request.getParameter("fechaNacimiento") == null ? "" : request.getParameter("fechaNacimiento"));
 
-        User userData = new User(String.valueOf(idusuario), idtipodocumento, numerodocumento,idpais, idrol, nombre,
-                apellido, correo, contrasena, celular, token,genero, imagen, fechanacimiento, fechacreacion);
-        UserModel user = new UserModel(userData);
-        String message = null, type = null;
-        if (user.updateUserById(idusuario)) {
+        if (user.updateById(userVO)) {
             type = "success";
             message = "El usuario se ha Actualizado correctamente";
         } else {
@@ -175,21 +135,17 @@ public class UserController extends HttpServlet {
         }
         request.setAttribute("message", message);
         request.setAttribute("type", type);
-        request.getRequestDispatcher("views/pages/user/listUser.jsp").forward(request, response);
-        
+        request.getRequestDispatcher("views/pages/user/list.jsp").forward(request, response);
+
     }
-        
-        
 
-
-    
-        private void deleteUser(HttpServletRequest request, HttpServletResponse response)
+    private void delete(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        int iduser = Integer.parseInt(request.getParameter("idusuario"));
+        int iduser = Integer.parseInt(request.getParameter("id"));
         UserModel user = new UserModel();
-        String message = null, type = null;
-        if (user.deleteUserById(iduser)) {
+
+        if (user.deleteById(iduser)) {
             type = "info";
             message = "El usuario se ha eliminado correctamente";
         } else {
@@ -198,22 +154,7 @@ public class UserController extends HttpServlet {
         }
         request.setAttribute("message", message);
         request.setAttribute("type", type);
-        request.getRequestDispatcher("views/pages/user/listUser.jsp").forward(request, response);
+        request.getRequestDispatcher("views/pages/user/list.jsp").forward(request, response);
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
-        protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-    }
 }

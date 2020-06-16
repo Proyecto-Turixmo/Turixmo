@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package connectiondb;
-import interfaces.IConection;
+import interfaces.IConnection;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -13,22 +13,22 @@ import java.sql.SQLException;
  *
  * @author andre
  */
-public class Connect implements IConection{
+public class Connect implements IConnection{
     
     private final String DBDRIVER, DBUSER, DBPASSWORD, DBNAME, DBURL;
-    private Connection conexion;
+    private Connection connect;
 
     public Connect() {
 
         DBDRIVER = "com.mysql.jdbc.Driver";
         DBUSER = "root";
-        DBPASSWORD = "";
+        DBPASSWORD = "monserrate1010";
         DBNAME = "proyecto_turixmo";
         DBURL = "jdbc:mysql://localhost:3306/" + DBNAME + "?useSSL=false";
 
         try {
             Class.forName(DBDRIVER).newInstance();
-            conexion = DriverManager.getConnection(DBURL, DBUSER, DBPASSWORD);
+            connect = DriverManager.getConnection(DBURL, DBUSER, DBPASSWORD);
 
         } catch (Exception e) {
             System.out.print("Error " + e);
@@ -37,14 +37,14 @@ public class Connect implements IConection{
 
     @Override
     public Connection getConnection() throws SQLException {
-            return this.conexion;
+            return this.connect;
     }
 
     @Override
     public Connection closeConnection() throws SQLException {
-            this.conexion.close();
-            this.conexion = null;
-            return this.conexion;
+            this.connect.close();
+            this.connect = null;
+            return this.connect;
                 
     }
     

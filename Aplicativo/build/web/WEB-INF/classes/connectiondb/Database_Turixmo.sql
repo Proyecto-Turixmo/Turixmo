@@ -147,7 +147,8 @@ idhabitacion INT NOT NULL,
 titulo varchar(100) NULL,
 url varchar(500) NOT NULL,
 fecharegistro DATETIME NOT NULL,
-primary key (idimagen)
+primary key (idimagen),
+foreign key (idhabitacion) references habitacion (idhabitacion)
 );
 
 CREATE TABLE reservahabitacion (

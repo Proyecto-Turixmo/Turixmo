@@ -6,8 +6,8 @@
 <%@include file="../../template/slidebar.jsp" %>
 
 <%@page import="java.util.ArrayList" %>
-<%@page import="models.dao.UserModel" %>
-<%@page import="models.vo.User" %>
+<%@page import="models.UserModel" %>
+<%@page import="vo.UserVO" %>
 
 
 
@@ -58,26 +58,25 @@
                                 </thead>
                                 <tbody>
                                     <%
-                                        User userData = new User();
+                                        UserVO userVO = new UserVO();
                                         UserModel user = new UserModel();
-                                        ArrayList<User> users = user.getAllUsers();
+                                        ArrayList<UserVO> users = user.getAll();
 
                                         for (int i = 0; i < users.size(); i++) {
-                                            userData = users.get(i);
+                                            userVO = users.get(i);
                                     %>
                                     </tr>
-                                <td><%= userData.getNumerodocumento()%></td>
-                                <td><%= userData.getIdrol().equals("1") ? "Propietario" : userData.getIdrol().equals("2")? "Admin" : "Turista"%></td>
-                                <td><%= userData.getNombre() + " " + userData.getApellido()%></td>
-                                <td><%= userData.getCorreo()%></td>
-                                <td><%= userData.getCelular()%></td>
-                                <td><img src="<%= userData.getImagen() == "" ? "" : "./libs/dist/img/avatar5.png"%>" class="img-circle img-size-50"></td>
+                                <td><%= userVO.getNumerodocumento()%></td>
+                                <td><%= userVO.getIdrol().equals("1") ? "Propietario" : userVO.getIdrol().equals("2")? "Admin" : "Turista"%></td>
+                                <td><%= userVO.getNombre() + " " + userVO.getApellido()%></td>
+                                <td><%= userVO.getCorreo()%></td>
+                                <td><%= userVO.getCelular()%></td>
+                                <td><img src="<%= userVO.getImagen() == "" ? "" : "./libs/dist/img/avatar5.png"%>" class="img-circle img-size-50"></td>
                                 <td >
                                     <div class="d-flex align-content-center">
-                                        <a href="user?action=getbyid&id=<%=userData.getIdusuario()%>" class="btn btn-default" ><i class="fas fa-edit"></i></a>
-                                        <form action="user" method="post">
-                                            <input type="hidden" name="action" value="delete">
-                                            <input type="hidden" name="idusuario" value="<%=userData.getIdusuario()%>">
+                                        <a href="UserGetbyid?id=<%=userVO.getIdusuario()%>" class="btn btn-default" ><i class="fas fa-edit"></i></a>
+                                        <form action="UserDelete" method="post">
+                                            <input type="hidden" name="id" value="<%=userVO.getIdusuario()%>">
                                            <button type="submit" class="btn btn-default ml-1" onclick="return confirm('Esta seguro de eliminar este registro?');" ><i class="fas fa-trash"></i></button>
                                         </form>
                                     </div>

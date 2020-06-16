@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package models.dao;
+package dao;
 
-import conectiondb.Connect;
+import connectiondb.Connect;
 import interfaces.IUser;
-import models.vo.User;
+import vo.UserVO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,88 +20,58 @@ import java.util.logging.Logger;
  *
  * @author andre
  */
-public class UserModel extends Connect implements IUser {
+public class UserDAO extends Connect implements IUser {
 
     private Connection conection = null;
     private PreparedStatement stmt = null;
     private ResultSet result = null;
     private boolean operacion = false;
-
     private String sql = "";
-    private String idusuario = "", idtipodocumento = "", numerodocumento = "",idpais="", idrol = "",
-            nombre = "", apellido = "", correo = "", contrasena = "", celular = "",genero="", token = "",
-            imagen = "", fechanacimiento = "", fechacreacion = "";
-
-    public UserModel() {
-    }
-
-    public UserModel(User usuario) {
-
-        try {
-            conection = this.getConnection();
-            this.idusuario = usuario.getIdusuario();
-            this.idtipodocumento = usuario.getIdtipodocumento();
-            this.numerodocumento = usuario.getNumerodocumento();
-            this.idpais = usuario.getIdpais();
-            this.idrol = usuario.getIdrol();
-            this.nombre = usuario.getNombre();
-            this.apellido = usuario.getApellido();
-            this.correo = usuario.getCorreo();
-            this.contrasena = usuario.getContrasena();
-            this.celular = usuario.getCelular();
-            this.genero = usuario.getGenero();
-            this.token = usuario.getToken();
-            this.imagen = usuario.getImagen();
-            this.fechanacimiento = usuario.getFechanacimiento();
-            this.fechacreacion = usuario.getFechacreacion();
-
-        } catch (Exception e) {
-            Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, e);
-        }
-    }
+    
+    public UserDAO() {}
 
     @Override
-    public boolean registerUser() {
-        try {
+    public boolean create(UserVO user) {
+        
+          try {
+            this.conection = this.getConnection();
             this.sql = "INSERT INTO usuario VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             this.stmt = conection.prepareStatement(sql);
-            this.stmt.setString(1, this.idusuario);
-            this.stmt.setString(2, this.idtipodocumento);
-            this.stmt.setString(3, this.numerodocumento);
-            this.stmt.setString(4, this.idpais);
-            this.stmt.setString(5, this.idrol);
-            this.stmt.setString(6, this.nombre);
-            this.stmt.setString(7, this.apellido);
-            this.stmt.setString(8, this.correo);
-            this.stmt.setString(9, this.contrasena);
-            this.stmt.setString(10, this.celular);
-            this.stmt.setString(11, this.genero);
-            this.stmt.setString(12, this.token);
-            this.stmt.setString(13, this.imagen);
-            this.stmt.setString(14, this.fechanacimiento.equals("") ? null : this.fechanacimiento);
-            this.stmt.setString(15, this.fechacreacion);
+            this.stmt.setString(1, user.getIdusuario().equals("") ? null :  user.getIdusuario() );
+            this.stmt.setString(2, user.getIdtipodocumento());
+            this.stmt.setString(3, user.getNumerodocumento());
+            this.stmt.setString(4, user.getIdpais());
+            this.stmt.setString(5, user.getIdrol());
+            this.stmt.setString(6, user.getNombre());
+            this.stmt.setString(7, user.getApellido());
+            this.stmt.setString(8, user.getCorreo());
+            this.stmt.setString(9, user.getContrasena());
+            this.stmt.setString(10, user.getCelular());
+            this.stmt.setString(11, user.getGenero().equals("") ? null :  user.getGenero());
+            this.stmt.setString(12, user.getToken().equals("") ? null :  user.getToken());
+            this.stmt.setString(13, user.getImagen().equals("") ? null :  user.getImagen());
+            this.stmt.setString(14, user.getFechanacimiento().equals("") ? null :  user.getFechanacimiento());
+            this.stmt.setString(15, user.getFecharegistro());
 
             this.stmt.executeUpdate();
             this.operacion = true;
         } catch (SQLException e) {
-            Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             try {
                 this.closeConnection();
             } catch (SQLException e) {
-                Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, e);
+                Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, e);
             }
         }
-
+        
         return this.operacion;
     }
 
     @Override
-    public ArrayList<User> getAllUsers() {
-
-        User usuarioData = null;
-
-        ArrayList<User> usuarios = new ArrayList<>();
+    public ArrayList<UserVO> getAll() {
+           
+        ArrayList<UserVO> users = new ArrayList<>();
 
         try {
             conection = this.getConnection();
@@ -109,135 +79,138 @@ public class UserModel extends Connect implements IUser {
             result = stmt.executeQuery();
 
             while (result.next()) {
-                usuarioData = new User(result.getString(1),
-                        result.getString(2),
-                        result.getString(3),
-                        result.getString(4),
-                        result.getString(5),
-                        result.getString(6),
-                        result.getString(7),
-                        result.getString(8),
-                        result.getString(9),
-                        result.getString(10),
-                        result.getString(11),
-                        result.getString(12),
-                        result.getString(13),
-                        result.getString(14),
-                        result.getString(15)
-                        
-                );
-                usuarios.add(usuarioData);
+                
+                    UserVO userVO = new UserVO();
+                    userVO.setIdusuario(result.getString(1));
+                    userVO.setIdtipodocumento(result.getString(2));
+                    userVO.setNumerodocumento(result.getString(3));
+                    userVO.setIdpais(result.getString(4));
+                    userVO.setIdrol(result.getString(5));
+                    userVO.setNombre(result.getString(6));
+                    userVO.setApellido(result.getString(7));
+                    userVO.setCorreo(result.getString(8));
+                    userVO.setContrasena(result.getString(9));
+                    userVO.setCelular(result.getString(10));
+                    userVO.setGenero(result.getString(11));
+                    userVO.setToken(result.getString(12));
+                    userVO.setImagen(result.getString(13));
+                    userVO.setFechanacimiento(result.getString(14));
+                    userVO.setFecharegistro(result.getString(15));
+                       
+                users.add(userVO);
             }
         } catch (SQLException e) {
-            Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             try {
                 this.closeConnection();
             } catch (SQLException e) {
-                Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, e);
+                Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, e);
             }
         }
 
-        return usuarios;
-
+        return users;
     }
-    
-        @Override
-    public User getUserById(int iduser) {
-       User usuarioData = null;
-        try {
+
+    @Override
+    public UserVO getById(int idUser) {
+        
+          UserVO userVO = new UserVO();
+        
+          try {
             conection = this.getConnection();
             stmt = conection.prepareStatement("SELECT * FROM usuario WHERE idusuario = ?");
-            stmt.setInt(1,iduser);
+            stmt.setInt(1,idUser);
             result = stmt.executeQuery();
 
             if(result.next()) {
-                usuarioData = new User(result.getString(1),
-                        result.getString(2),
-                        result.getString(3),
-                        result.getString(4),
-                        result.getString(5),
-                        result.getString(6),
-                        result.getString(7),
-                        result.getString(8),
-                        result.getString(9),
-                        result.getString(10),
-                        result.getString(11),
-                        result.getString(12),
-                        result.getString(13),
-                        result.getString(14),
-                        result.getString(15)
-                );
+                    
+                    userVO.setIdusuario(result.getString(1));
+                    userVO.setIdtipodocumento(result.getString(2));
+                    userVO.setNumerodocumento(result.getString(3));
+                    userVO.setIdpais(result.getString(4));
+                    userVO.setIdrol(result.getString(5));
+                    userVO.setNombre(result.getString(6));
+                    userVO.setApellido(result.getString(7));
+                    userVO.setCorreo(result.getString(8));
+                    userVO.setContrasena(result.getString(9));
+                    userVO.setCelular(result.getString(10));
+                    userVO.setGenero(result.getString(11));
+                    userVO.setToken(result.getString(12));
+                    userVO.setImagen(result.getString(13));
+                    userVO.setFechanacimiento(result.getString(14));
+                    userVO.setFecharegistro(result.getString(15));
               
             }
         } catch (SQLException e) {
-            Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             try {
                 this.closeConnection();
             } catch (SQLException e) {
-                Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, e);
+                Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, e);
             }
         }
 
-        return usuarioData;
+        return userVO;
+    
     }
 
-
     @Override
-    public boolean updateUserById(int iduser) {
-         
+    public boolean updateById(UserVO user) {
+        
         try {
-            this.sql = "UPDATE usuarios SET idtipodocumento = ?, idrol = ?, nombre = ?,"
+            conection = this.getConnection();
+            this.sql = "UPDATE usuario SET idtipodocumento = ?, idrol = ?, nombre = ?,"
                     + "apellido = ?, correo = ?, celular = ?, fechanacimiento = ? "
                     + "WHERE idusuario = ?";
-            this.stmt = conection.prepareStatement(sql);
-            this.stmt.setString(1, this.idtipodocumento);
-            this.stmt.setString(2, this.idrol);
-            this.stmt.setString(3, this.nombre);
-            this.stmt.setString(4, this.apellido);
-            this.stmt.setString(5, this.correo);
-            this.stmt.setString(6, this.celular);
-            this.stmt.setString(7, this.fechanacimiento.equals("") ? null : this.fechanacimiento);
-            this.stmt.setString(8, this.idusuario);
+            this.stmt = conection.prepareStatement(this.sql);
+            this.stmt.setString(1, user.getIdtipodocumento());
+            this.stmt.setString(2, user.getIdrol());
+            this.stmt.setString(3, user.getNombre());
+            this.stmt.setString(4, user.getApellido());
+            this.stmt.setString(5, user.getApellido());
+            this.stmt.setString(6, user.getCelular());
+            this.stmt.setString(7, user.getFechanacimiento().equals("") ? null : user.getFechanacimiento());
+            this.stmt.setString(8, user.getIdusuario());
 
             this.stmt.executeUpdate();
             this.operacion = true;
         } catch (SQLException e) {
-            Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             try {
                 this.closeConnection();
             } catch (SQLException e) {
-                Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, e);
+                Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, e);
             }
         }
 
         return this.operacion;
-      }
-    
+    }
 
     @Override
-    public boolean deleteUserById(int iduser) {
-        try {
+    public boolean deleteById(int idUser) {
+        
+       try {
             conection = this.getConnection();
-            sql = "DELETE  FROM usuarios WHERE idusuario = ? ";
+            sql = "DELETE  FROM usuario WHERE idusuario = ? ";
             stmt = conection.prepareStatement(sql);
-            stmt.setInt(1, iduser);
+            stmt.setInt(1, idUser);
             stmt.executeUpdate();
 
             operacion = true;
         } catch (SQLException e) {
-            Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             try {
                 this.closeConnection();
             } catch (SQLException e) {
-                Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, e);
+                Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, e);
             }
         }
         return operacion;
     }
+    }
 
 
-}

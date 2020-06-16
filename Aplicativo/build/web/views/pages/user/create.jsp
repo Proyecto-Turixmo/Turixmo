@@ -2,10 +2,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="../../template/header.jsp" %>
 <%@include file="../../template/navbar.jsp" %>
-<%@page import="models.vo.User" %>
+<%@page import="vo.UserVO" %>
 
-<% User user = (User)request.getAttribute("user");
-       user = (user != null) ? user : new User(); %>
+<% UserVO user = (UserVO)request.getAttribute("user");
+       user = (user != null) ? user : new UserVO(); %>
 
 
   <!-- Content Wrapper. Contains page content -->
@@ -40,24 +40,23 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="user" method="post">
-                  <input type="hidden" name="action" value="<%=(user.getIdusuario() != "") ? "update": "save"%>">
+              <form action="<%=(user.getIdusuario() != "") ? "UserUpdate": "UserCreate"%>" method="post">
                    <% if(user.getIdusuario() != ""){%>
                    <input type="hidden" name="id" value="<%=user.getIdusuario()%>">
                    <%}%>
                 <div class="card-body">
                     <%@include file="../../template/showMessage.jsp" %>
                   <div class="form-group">
-                    <label for="tipo-documneto">Tipo documento</label>
-                    <select name="tipo-documento" class="form-control" id="tipo-documento">
+                    <label for="tipoDocumento">Tipo documento</label>
+                    <select name="tipoDocumento" class="form-control" id="tipo-documento">
                         <option  selected>-- Selecciona un tipo --</option>
                         <option <%=(user.getIdtipodocumento().equalsIgnoreCase("1"))?"selected": ""%> value="1">Cédula de ciudadania</option>
                         <option <%=(user.getIdtipodocumento().equalsIgnoreCase("2"))?"selected": ""%> value="2">Cédula de extranjeria</option>
                     </select>
                   </div>
                     <div class="form-group">
-                    <label for="numero-documento">Numero de documento</label>
-                    <input type="text" <%=(user.getIdusuario() != "") ? "readonly": "name='numero-documento'"%>  value="<%=user.getNumerodocumento()%>" class="form-control" id="numero-documento" placeholder="Ingresa el numero de tu documento">
+                    <label for="numeroDocumento">Numero de documento</label>
+                    <input type="text" <%=(user.getIdusuario() != "") ? "readonly": "name='numeroDocumento'"%>  value="<%=user.getNumerodocumento()%>" class="form-control" id="numeroDocumento" placeholder="Ingresa el numero de tu documento">
                   </div>
                     <div class="form-group">
                     <label for="rol">Rol</label>

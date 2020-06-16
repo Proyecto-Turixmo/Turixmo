@@ -4,22 +4,22 @@
  * and open the template in the editor.
  */
 
-package models.vo;
+package vo;
 
 /**
  *
  * @author andre
  */
-public class User {
+public class UserVO {
    private String idusuario = "", idtipodocumento = "",numerodocumento ="",idpais="",idrol="",
                   nombre="",apellido="",correo="",contrasena="",celular="",genero="",token="",
-                  imagen="",fechanacimiento="",fechacreacion="";
+                  imagen="",fechanacimiento="",fecharegistro="";
 
-    public User() {}
+    public UserVO() {}
 
-    public User(String idusuario,String idtipodocumento,String numerodocumento, String idpais,String idrol,
+    public UserVO(String idusuario,String idtipodocumento,String numerodocumento, String idpais,String idrol,
                 String nombre,String apellido,String correo,String contrasena,String celular,String genero,
-                String token,String imagen,String fechanacimiento,String fechacreacion) {
+                String token,String imagen,String fechanacimiento,String fecharegistro) {
         
         this.idusuario = idusuario;
         this.idtipodocumento = idtipodocumento;
@@ -35,7 +35,7 @@ public class User {
         this.token = token ;
         this.imagen = imagen;
         this.fechanacimiento = fechanacimiento;
-        this.fechacreacion = fechacreacion;
+        this.fecharegistro = fecharegistro;
     }
 
     public String getIdusuario() {
@@ -94,8 +94,8 @@ public class User {
         return fechanacimiento;
     }
 
-    public String getFechacreacion() {
-        return fechacreacion;
+    public String getFecharegistro() {
+        return fecharegistro;
     }
 
     public void setIdusuario(String idusuario) {
@@ -154,8 +154,8 @@ public class User {
         this.fechanacimiento = fechanacimiento;
     }
 
-    public void setFechacreacion(String fechacreacion) {
-        this.fechacreacion = fechacreacion;
+    public void setFecharegistro(String fecharegistro) {
+        this.fecharegistro = fecharegistro;
     }
 
   

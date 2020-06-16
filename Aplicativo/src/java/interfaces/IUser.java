@@ -7,16 +7,16 @@
 package interfaces;
 
 import java.util.ArrayList;
-import models.vo.User;
+import vo.UserVO;
 /**
  *
  * @author andre
  */
 public interface IUser {
-    public abstract boolean registerUser();
-    public abstract ArrayList<User> getAllUsers();
-    public abstract User getUserById(int iduser);
-    public abstract boolean updateUserById(int iduser);
-    public abstract boolean deleteUserById(int iduser);
+    abstract boolean create(UserVO user);
+    abstract ArrayList<UserVO> getAll();
+    abstract UserVO getById(int idUser);
+    abstract boolean updateById(UserVO user);
+    abstract boolean deleteById(int idUser);
     
 }
