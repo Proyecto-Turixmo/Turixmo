@@ -1,3 +1,5 @@
 - Validacion de datos para insertar usuario
     - No permitir campos vacios
     - No permitir Ingregar letras donde deben ser numeros
+
+#Edicion Alfred, prueba para hacer push
