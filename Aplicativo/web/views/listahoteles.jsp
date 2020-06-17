@@ -44,7 +44,7 @@
             
             
             sta=cnx.createStatement();
-            rs=sta.executeQuery("select*from hoteles");
+            rs=sta.executeQuery("select*from hotel");
             while(rs.next()){
             
                 %>
