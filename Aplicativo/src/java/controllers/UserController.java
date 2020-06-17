@@ -17,7 +17,7 @@ import vo.UserVO;
 import util.Session;
 
 @WebServlet(name = "UserController",
-        urlPatterns = {"/UserNew", "/UserGetall", "/UserGetbyid", "/mama",
+        urlPatterns = {"/UserNew", "/UserGetall", "/UserGetbyid", "/closeSession",
             "/UserCreate", "/UserUpdate", "/UserDelete"})
 
 public class UserController extends HttpServlet {
@@ -39,6 +39,9 @@ public class UserController extends HttpServlet {
                 break;
             case "/UserGetbyid":
                 this.getUserById(request, response);
+                break;
+            case "/closeSession":
+                this.closeSession(request, response);
                 break;
             default:
                 request.getRequestDispatcher("views/error404.jsp").forward(request, response);
@@ -155,6 +158,18 @@ public class UserController extends HttpServlet {
         request.setAttribute("message", message);
         request.setAttribute("type", type);
         request.getRequestDispatcher("views/pages/user/list.jsp").forward(request, response);
+    }
+
+    
+    
+        private void closeSession(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+         if(Session.drop(request)){
+                request.getRequestDispatcher("views/pages/auth/login.jsp").forward(request, response);
+         }else{
+               request.getRequestDispatcher("views/pages/user/list.jsp").forward(request, response);
+         }
     }
 
 }

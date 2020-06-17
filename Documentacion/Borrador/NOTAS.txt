@@ -1,5 +1,7 @@
 - Validacion de datos para insertar usuario
     - No permitir campos vacios
     - No permitir Ingregar letras donde deben ser numeros
+    - Validacion con javascript
+    - Accion de recordar contraseña
 
 #Edicion Alfred, prueba para hacer push

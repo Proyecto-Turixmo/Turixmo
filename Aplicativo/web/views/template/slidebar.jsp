@@ -75,6 +75,12 @@
                   <p>Consultar usuarios</p>
                 </a>
               </li>
+               <li class="nav-item">
+                <a href="closeSession" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Cerrar Sesion</p>
+                </a>
+              </li>
             </ul>
           </li>
 <!--          <li class="nav-item has-treeview">
