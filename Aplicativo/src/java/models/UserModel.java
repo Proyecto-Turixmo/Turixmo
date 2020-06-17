@@ -84,5 +84,24 @@ public class UserModel implements IUser {
         }
         return result;
     }
+    
+
+    public UserVO validate(String email, String password) {
+        
+        UserVO userVO = null;
+        UserDAO userDAO = new UserDAO();
+      
+        try {
+            UserVO userValidate = userDAO.validate(email);
+            if(userValidate != null){
+                if(password.equals(userValidate.getContrasena())){
+                    userVO = userValidate;
+                }
+            }
+        } catch (Exception e) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return userVO;
+    }
 
 }

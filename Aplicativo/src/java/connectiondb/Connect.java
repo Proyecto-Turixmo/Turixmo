@@ -22,7 +22,7 @@ public class Connect implements IConnection{
 
         DBDRIVER = "com.mysql.jdbc.Driver";
         DBUSER = "root";
-        DBPASSWORD = "";
+        DBPASSWORD = "monserrate1010";
         DBNAME = "proyecto_turixmo";
         DBURL = "jdbc:mysql://localhost:3306/" + DBNAME + "?useSSL=false";
 

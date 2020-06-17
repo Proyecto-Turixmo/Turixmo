@@ -10,26 +10,26 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import models.UserModel;
+import vo.UserSessionVO;
 import vo.UserVO;
+import util.Session;
 
 @WebServlet(name = "UserController",
-        urlPatterns = {"/UserNew", "/UserGetall", "/UserGetbyid",
-             "/UserCreate", "/UserUpdate", "/UserDelete"})
+        urlPatterns = {"/UserNew", "/UserGetall", "/UserGetbyid", "/closeSession",
+            "/UserCreate", "/UserUpdate", "/UserDelete"})
 
 public class UserController extends HttpServlet {
 
     public String message = null, type = null;
 
-    public UserController() {
-        
-    }
-
-    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
- 
+
+        Session.validateHome(request, response);
+
         switch (request.getServletPath()) {
             case "/UserGetall":
                 request.getRequestDispatcher("views/pages/user/list.jsp").forward(request, response);
@@ -40,17 +40,21 @@ public class UserController extends HttpServlet {
             case "/UserGetbyid":
                 this.getUserById(request, response);
                 break;
+            case "/closeSession":
+                this.closeSession(request, response);
+                break;
             default:
                 request.getRequestDispatcher("views/error404.jsp").forward(request, response);
-
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String result = (String)request.getServletPath();
-        switch (result) {
+
+        Session.validateHome(request, response);
+        
+        switch (request.getServletPath()) {
             case "/UserCreate":
                 this.create(request, response);
                 break;
@@ -68,13 +72,13 @@ public class UserController extends HttpServlet {
 
     private void create(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         Date fecha = new Date();
-        DateFormat formateador  = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        
+        DateFormat formateador = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
         UserModel user = new UserModel();
         UserVO userVO = new UserVO();
-        
+
         userVO.setIdtipodocumento(request.getParameter("tipoDocumento"));
         userVO.setNumerodocumento(request.getParameter("numeroDocumento"));
         userVO.setIdpais("1");
@@ -87,8 +91,8 @@ public class UserController extends HttpServlet {
         userVO.setFechanacimiento(request.getParameter("fechaNacimiento") == null ? "" : request.getParameter("fechaNacimiento"));
         userVO.setFecharegistro(formateador.format(fecha));
 
-       
         if (user.create(userVO)) {
+
             this.type = "success";
             this.message = "El usuario se ha registrado correctamente";
         } else {
@@ -114,7 +118,6 @@ public class UserController extends HttpServlet {
     private void update(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        
         UserModel user = new UserModel();
         UserVO userVO = new UserVO();
         userVO.setIdusuario(request.getParameter("id"));
@@ -155,6 +158,18 @@ public class UserController extends HttpServlet {
         request.setAttribute("message", message);
         request.setAttribute("type", type);
         request.getRequestDispatcher("views/pages/user/list.jsp").forward(request, response);
+    }
+
+    
+    
+        private void closeSession(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+         if(Session.drop(request)){
+                request.getRequestDispatcher("views/pages/auth/login.jsp").forward(request, response);
+         }else{
+               request.getRequestDispatcher("views/pages/user/list.jsp").forward(request, response);
+         }
     }
 
 }

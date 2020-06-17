@@ -18,5 +18,6 @@ public interface IUser {
     abstract UserVO getById(int idUser);
     abstract boolean updateById(UserVO user);
     abstract boolean deleteById(int idUser);
+//    abstract UserVO validate(UserVO user);
     
 }
