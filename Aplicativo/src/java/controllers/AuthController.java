@@ -6,15 +6,13 @@
 package controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import models.UserModel;
 import util.Session;
-import vo.UserSessionVO;
 import vo.UserVO;
 
 /**
@@ -24,7 +22,7 @@ import vo.UserVO;
 @WebServlet(name = "AuthController", urlPatterns = {"/auth", "/login","/validate", "/forgotPassword", "/forgotPassword", "/register"})
 public class AuthController extends HttpServlet {
 
-    public String message = null, type = null;
+    public String message = null, type = "danger";
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -68,22 +66,29 @@ public class AuthController extends HttpServlet {
     protected void doValidate(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        UserVO user = new UserVO();
-        user.setCorreo(request.getParameter("correo"));
-        user.setContrasena(request.getParameter("contrasena"));
+        UserVO userVO = new UserVO();
+        userVO.setCorreo(request.getParameter("correo"));
+        userVO.setContrasena(request.getParameter("contrasena"));
 
-        if (user.getCorreo().equals("turixmo@gmail.com")) {
-            if (user.getContrasena().equals("12345")) {
-                Session.add(request, "1", "2", user.getCorreo(), user.getContrasena());
-                Session.validateOutside(request, response);
+        if (!userVO.getCorreo().equals("")) {
+            if (!userVO.getContrasena().equals("")) {
+                UserModel user = new UserModel();
+                UserVO userResult = user.validate(userVO.getCorreo(),userVO.getContrasena());
+                  if(userResult != null){
+                      Session.add(request,userResult.getIdusuario(),
+                                          userResult.getIdrol(), 
+                                          userResult.getCorreo(),
+                                          userResult.getImagen());
+                  Session.validateOutside(request, response);
+                  }else{
+                     this.message = "Usuario y/o contraseña Incorrectos.";
+                  }
             } else {
-                this.type = "danger";
-                this.message = "Usuario y/o contraseña Incorrectos";
+                this.message = "Debes rellenar todos campos.";
             }
         }else{
         
-                this.type = "danger";
-                this.message = "Usuario y/o contraseña Incorrectos";
+                this.message = "Debes rellenar todos campos.";
         }
        request.setAttribute("type",this.type);
         request.setAttribute("message",this.message);
