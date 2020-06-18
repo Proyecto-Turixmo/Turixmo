@@ -10,12 +10,12 @@ package vo;
  *
  * @author ACER
  */
-public class HabitacionVO {
+public class RoomVO {
     private String idhabitacion, idtipohabitacion, idserviciohabitacion, idhotel,
             numerohabitacion, cantidadpersonas, precio, numeropiso, descripcion,
             disponibilidad,fechacreacion;
 
-    public HabitacionVO(String idhabitacion, String idtipohabitacion, String idserviciohabitacion, String idhotel, String numerohabitacion, String cantidadpersonas, String precio, String numeropiso, String descripcion, String disponibilidad, String fechacreacion) {
+    public RoomVO(String idhabitacion, String idtipohabitacion, String idserviciohabitacion, String idhotel, String numerohabitacion, String cantidadpersonas, String precio, String numeropiso, String descripcion, String disponibilidad, String fechacreacion) {
         this.idhabitacion = idhabitacion;
         this.idtipohabitacion = idtipohabitacion;
         this.idserviciohabitacion = idserviciohabitacion;
