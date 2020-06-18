@@ -4,4 +4,5 @@
     - Validacion con javascript
     - Accion de recordar contraseña
 
-#Edicion Alfred, prueba para hacer push
+- Boton de politicas y privacidad
+- MejorarSeccion de registro de Propietario

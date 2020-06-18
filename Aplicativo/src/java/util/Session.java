@@ -11,13 +11,16 @@ import vo.UserSessionVO;
 
 public class Session {
 
-    private static String redirectToSuccess = "views/pages/user/list.jsp";
+    private static String redirectToSuccessOnwer = "views/pages/user/list.jsp";
+    private static String redirectToSuccessTourist = "index.jsp";
     private static String redirectToError = "views/pages/auth/login.jsp";
     private static String name = "user";
 
     public static void validateHome(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             if (!check(request)) {
+                request.setAttribute("type", "warning");
+                request.setAttribute("message", "Parece que no has iniciado sesion!");
                 request.getRequestDispatcher(redirectToError).forward(request, response);
             }
         } catch (Exception e) {
@@ -28,7 +31,11 @@ public class Session {
     public static void validateOutside(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             if (check(request)) {
-                request.getRequestDispatcher(redirectToSuccess).forward(request, response);
+                if(get(request).getIdrol().equals("1")){
+                    request.getRequestDispatcher(redirectToSuccessOnwer).forward(request, response);
+                }else{
+                    request.getRequestDispatcher(redirectToSuccessTourist).forward(request, response);
+                }
             }
         } catch (Exception e) {
             Logger.getLogger(Session.class.getName()).log(Level.SEVERE, null, e);

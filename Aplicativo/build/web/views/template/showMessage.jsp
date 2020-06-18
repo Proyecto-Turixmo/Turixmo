@@ -8,7 +8,7 @@
   <%}else if(request.getAttribute("type") == "info"){ %>
     <strong>Listo!</strong>  ${message}.
   <%}else{ %>
-   <strong>No se ha ingresado un tipo</strong>
+    ${message}.
   <% } %>
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>

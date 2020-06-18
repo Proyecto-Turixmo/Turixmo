@@ -2,7 +2,7 @@
 
 <!-- Main Footer -->
   <footer class="main-footer " style="position: relative">
-    <strong>Copyright &copy; 2020 <a href="#">Turixmo</a>.</strong>
+    <strong>Copyright &copy; 2020 <a href="./">Turixmo</a>.</strong>
     Derechos reservados.
     <div class="float-right d-none d-sm-inline-block">
         En desarrollo

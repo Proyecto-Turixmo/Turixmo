@@ -1,5 +1,8 @@
 <%@include file="../../template/header.jsp" %>
 
+<%@include file="../../template/navbarDefault.jsp" %>
+
+
 
 <div class="container mt-5">
     <div class="row mt-4">
@@ -33,7 +36,7 @@
                                 <a href="forgotPassword" class=" my-n1 ">¿Olvidaste tu contraseña?</a>
                             </div>
                             <div class="form-group  text-sm">
-                                <span class="col-md-6 align-content-start">Aun no tienes una cuenta? <a href="#" class="">Registrarme!</a></span>
+                                <span class="col-md-6 align-content-start">Aun no tienes una cuenta? <a href="registerTourist" class="">Registrarme!</a></span>
                             </div>
                         </div>
 <!--                 <hr class="py-0 pb-n2">
@@ -46,6 +49,8 @@
     </div>
     <div class="col-md-3"></div>
 </div> 
+
+<%@include file="../../template/footerDefault.jsp" %></div>
 </div>
-</div>
+
 

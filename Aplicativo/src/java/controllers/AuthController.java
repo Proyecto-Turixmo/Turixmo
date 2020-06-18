@@ -6,6 +6,9 @@
 package controllers;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +22,8 @@ import vo.UserVO;
  *
  * @author andre
  */
-@WebServlet(name = "AuthController", urlPatterns = {"/auth", "/login","/validate", "/forgotPassword", "/forgotPassword", "/register"})
+@WebServlet(name = "AuthController", urlPatterns = {"/login", "/forgotPassword", "/forgotPassword", "/registerOwner", "/registerTourist",
+    "/validate","/createUser"})
 public class AuthController extends HttpServlet {
 
     public String message = null, type = "danger";
@@ -33,6 +37,9 @@ public class AuthController extends HttpServlet {
         switch (request.getServletPath()) {
             case "/validate":
                 this.doValidate(request, response);
+                break;
+            case "/createUser":
+                this.create(request, response);
                 break;
             default:
                 request.getRequestDispatcher("views/error404.jsp").forward(request, response);
@@ -53,8 +60,13 @@ public class AuthController extends HttpServlet {
             case "/forgotPassword":
                 request.getRequestDispatcher("views/pages/auth/forgotPassword.jsp").forward(request, response);
                 break;
-            case "/register":
-                request.getRequestDispatcher("views/pages/auth/fortgotPassword.jsp").forward(request, response);
+            case "/registerOwner":
+                request.setAttribute("role",1);
+                request.getRequestDispatcher("views/pages/user/createOwner.jsp").forward(request, response);
+                break;
+           case "/registerTourist":
+               request.setAttribute("role",3);
+                request.getRequestDispatcher("views/pages/user/createTourist.jsp").forward(request, response);
                 break;
             default:
                 request.getRequestDispatcher("views/error404.jsp").forward(request, response);
@@ -93,6 +105,50 @@ public class AuthController extends HttpServlet {
        request.setAttribute("type",this.type);
         request.setAttribute("message",this.message);
        request.getRequestDispatcher("views/pages/auth/login.jsp").forward(request, response);
+    }
+
+    
+        private void create(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        Date fecha = new Date();
+        DateFormat formateador = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        UserModel user = new UserModel();
+        UserVO userVO = new UserVO();
+
+        userVO.setIdtipodocumento(request.getParameter("tipoDocumento"));
+        userVO.setNumerodocumento(request.getParameter("numeroDocumento"));
+        userVO.setIdpais("1");
+        userVO.setIdrol(request.getParameter("rol"));
+        userVO.setNombre(request.getParameter("nombre"));
+        userVO.setApellido(request.getParameter("apellido"));
+        userVO.setCorreo(request.getParameter("correo"));
+        userVO.setContrasena(request.getParameter("contrasena"));
+        userVO.setCelular(request.getParameter("celular"));
+        userVO.setFechanacimiento(request.getParameter("fechaNacimiento") == null ? "" : request.getParameter("fechaNacimiento"));
+        userVO.setFecharegistro(formateador.format(fecha));
+
+        if (user.create(userVO)) {
+
+            this.type = "success";
+            this.message = "El usuario se ha registrado correctamente";
+        } else {
+            this.type = "danger";
+            this.message = "Lo sentimos el usuario no se pudo registrar";
+        }
+        request.setAttribute("message", this.message);
+        request.setAttribute("type", this.type);
+        
+        if(userVO.getIdrol().equals("1")){
+           request.setAttribute("role",userVO.getIdrol());
+           request.getRequestDispatcher("views/pages/user/createOwner.jsp").forward(request, response);
+        }else{
+           request.setAttribute("role",userVO.getIdrol());
+           request.getRequestDispatcher("views/pages/user/createTourist.jsp").forward(request, response);
+        }
+        
+
     }
 
 

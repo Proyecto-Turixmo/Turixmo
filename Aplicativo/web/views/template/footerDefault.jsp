@@ -1,15 +1,10 @@
-
-
-<!-- Main Footer -->
-  <footer class="main-footer " style="position: relative">
-    <strong>Copyright &copy; 2020 <a href="./">Turixmo</a>.</strong>
+  
+<footer class="footer-regiser-onwer py-3 small" >
+      <hr>
+    <strong class="ml-3 ml-md-5">Copyright &copy; 2020 <a href="./">Turixmo</a>.</strong>
     Derechos reservados.
-    <div class="float-right d-none d-sm-inline-block">
-        En desarrollo
-    </div>
   </footer>
 </div>
-
 
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
