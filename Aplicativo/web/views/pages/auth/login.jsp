@@ -36,8 +36,11 @@
                                 <a href="forgotPassword" class=" my-n1 ">¿Olvidaste tu contraseña?</a>
                             </div>
                             <div class="form-group  text-sm">
-                                <span class="col-md-6 align-content-start">Aun no tienes una cuenta? <a href="registerTourist" class="">Registrarme!</a></span>
+                                <span class="col-md-6 align-content-start">Aun no tienes una cuenta? <a href="addTourist" class="">Registrarme!</a></span>
+                            </div>                            <div class="form-group  text-sm">
+                                <span class="col-md-6 align-content-start">Tienes un Hotel? Haz parte del equipo! <a href="addOwner" class="">Aqui!</a></span>
                             </div>
+                            
                         </div>
 <!--                 <hr class="py-0 pb-n2">
                  <span class="mt-0">Turixmo.com</span>-->

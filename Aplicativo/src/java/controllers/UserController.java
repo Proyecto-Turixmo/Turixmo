@@ -18,8 +18,8 @@ import util.Session;
 import util.Util;
 
 @WebServlet(name = "UserController",
-        urlPatterns = {"/UserNew", "/UserGetall", "/UserGetbyid", "/closeSession",
-            "/UserCreate", "/UserUpdate", "/UserDelete"})
+        urlPatterns = {"/UserAdd", "/UserGetall", "/UserEdit", "/closeSession",
+            "/UserCreate", "/UserUpdate", "/UserDisable"})
 
 public class UserController extends HttpServlet {
 
@@ -32,14 +32,14 @@ public class UserController extends HttpServlet {
         Session.validateHome(request, response);
 
         switch (request.getServletPath()) {
+            case "/UserAdd":
+                request.getRequestDispatcher("views/pages/user/update.jsp").forward(request, response);
+                break;
             case "/UserGetall":
                 request.getRequestDispatcher("views/pages/user/list.jsp").forward(request, response);
                 break;
-            case "/UserNew":
-                request.getRequestDispatcher("views/pages/user/update.jsp").forward(request, response);
-                break;
-            case "/UserGetbyid":
-                this.getUserById(request, response);
+            case "/UserEdit":
+                this.edit(request, response);
                 break;
             case "/closeSession":
                 this.closeSession(request, response);
@@ -62,8 +62,8 @@ public class UserController extends HttpServlet {
             case "/UserUpdate":
                 this.update(request, response);
                 break;
-            case "/UserDelete":
-                this.delete(request, response);
+            case "/UserDisable":
+                this.disable(request, response);
                 break;
             default:
                 request.getRequestDispatcher("views/error404.jsp").forward(request, response);
@@ -107,7 +107,7 @@ public class UserController extends HttpServlet {
 
     }
 
-    private void getUserById(HttpServletRequest request, HttpServletResponse response)
+    private void edit(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         int iduser = Integer.parseInt(request.getParameter("id"));
@@ -156,7 +156,7 @@ public class UserController extends HttpServlet {
 
     }
 
-    private void delete(HttpServletRequest request, HttpServletResponse response)
+    private void disable(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         int iduser = Integer.parseInt(request.getParameter("id"));

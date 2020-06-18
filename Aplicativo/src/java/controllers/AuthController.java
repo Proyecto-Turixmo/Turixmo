@@ -23,7 +23,7 @@ import vo.UserVO;
  *
  * @author andre
  */
-@WebServlet(name = "AuthController", urlPatterns = {"/login", "/forgotPassword", "/forgotPassword", "/registerOwner", "/registerTourist",
+@WebServlet(name = "AuthController", urlPatterns = {"/login", "/forgotPassword", "/forgotPassword", "/addOwner", "/addTourist",
     "/validate","/createUser"})
 public class AuthController extends HttpServlet {
 
@@ -61,13 +61,13 @@ public class AuthController extends HttpServlet {
             case "/forgotPassword":
                 request.getRequestDispatcher("views/pages/auth/forgotPassword.jsp").forward(request, response);
                 break;
-            case "/registerOwner":
+            case "/addOwner":
                 request.setAttribute("role",1);
-                request.getRequestDispatcher("views/pages/user/createOwner.jsp").forward(request, response);
+                request.getRequestDispatcher("views/pages/user/addOwner.jsp").forward(request, response);
                 break;
-           case "/registerTourist":
+           case "/addTourist":
                request.setAttribute("role",3);
-                request.getRequestDispatcher("views/pages/user/createTourist.jsp").forward(request, response);
+                request.getRequestDispatcher("views/pages/user/addTourist.jsp").forward(request, response);
                 break;
             default:
                 request.getRequestDispatcher("views/error404.jsp").forward(request, response);
@@ -141,10 +141,10 @@ public class AuthController extends HttpServlet {
         
         if(userVO.getIdrol().equals("1")){
            request.setAttribute("role",userVO.getIdrol());
-           request.getRequestDispatcher("views/pages/user/createOwner.jsp").forward(request, response);
+           request.getRequestDispatcher("views/pages/user/addOwner.jsp").forward(request, response);
         }else{
            request.setAttribute("role",userVO.getIdrol());
-           request.getRequestDispatcher("views/pages/user/createTourist.jsp").forward(request, response);
+           request.getRequestDispatcher("views/pages/user/addTourist.jsp").forward(request, response);
         }
         
 

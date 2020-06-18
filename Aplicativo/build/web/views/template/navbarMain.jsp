@@ -117,8 +117,8 @@
     <a class="dropdown-item py-0" href="#"><strong class="text-primary">Opciones</strong></a>
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="login">Iniciar Sesion</a>
-    <a class="dropdown-item" href="registerTourist">Registrar Turista</a>
-    <a class="dropdown-item" href="registerOwner">Registrar Propietario</a>
+    <a class="dropdown-item" href="addTourist">Registrar Turista</a>
+    <a class="dropdown-item" href="addOwner">Registrar Propietario</a>
     <a class="dropdown-item" href="UserGetall">Session de Admins</a>
   </div>
 </div>

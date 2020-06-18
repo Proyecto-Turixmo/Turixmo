@@ -74,8 +74,8 @@
                                 <td><img src="<%= userVO.getImagen() == "" ? "" : "./libs/dist/img/avatar5.png"%>" class="img-circle img-size-50"></td>
                                 <td >
                                     <div class="d-flex align-content-center">
-                                        <a href="UserGetbyid?id=<%=userVO.getIdusuario()%>" class="btn btn-default" ><i class="fas fa-edit"></i></a>
-                                        <form action="UserDelete" method="post">
+                                        <a href="UserEdit?id=<%=userVO.getIdusuario()%>" class="btn btn-default" ><i class="fas fa-edit"></i></a>
+                                        <form action="UserDisable" method="post">
                                             <input type="hidden" name="id" value="<%=userVO.getIdusuario()%>">
                                            <button type="submit" class="btn btn-default ml-1" onclick="return confirm('Esta seguro de eliminar este registro?');" ><i class="fas fa-trash"></i></button>
                                         </form>
