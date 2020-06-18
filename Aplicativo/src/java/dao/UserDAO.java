@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import util.Util;
 
 /**
  *
@@ -36,9 +37,9 @@ public class UserDAO extends Connect implements IUser {
 
         try {
             this.conection = this.getConnection();
-            this.sql = "INSERT INTO usuario VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            this.sql = "call sp_insertarusuario(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             this.stmt = conection.prepareStatement(sql);
-            this.stmt.setString(1, user.getIdusuario().equals("") ? null : user.getIdusuario());
+            this.stmt.setString(1, Util.spaceToNull(user.getIdusuario()));
             this.stmt.setString(2, user.getIdtipodocumento());
             this.stmt.setString(3, user.getNumerodocumento());
             this.stmt.setString(4, user.getIdpais());
@@ -48,11 +49,12 @@ public class UserDAO extends Connect implements IUser {
             this.stmt.setString(8, user.getCorreo());
             this.stmt.setString(9, user.getContrasena());
             this.stmt.setString(10, user.getCelular());
-            this.stmt.setString(11, user.getGenero().equals("") ? null : user.getGenero());
-            this.stmt.setString(12, user.getToken().equals("") ? null : user.getToken());
-            this.stmt.setString(13, user.getImagen().equals("") ? null : user.getImagen());
-            this.stmt.setString(14, user.getFechanacimiento().equals("") ? null : user.getFechanacimiento());
+            this.stmt.setString(11, Util.spaceToNull(user.getGenero()));
+            this.stmt.setString(12, Util.spaceToNull(user.getToken()));
+            this.stmt.setString(13, Util.spaceToNull(user.getImagen()));
+            this.stmt.setString(14, Util.spaceToNull(user.getFechanacimiento()));
             this.stmt.setString(15, user.getFecharegistro());
+            this.stmt.setString(16, user.getInhabilitado());
 
             this.stmt.executeUpdate();
             this.operacion = true;
@@ -76,7 +78,7 @@ public class UserDAO extends Connect implements IUser {
 
         try {
             conection = this.getConnection();
-            stmt = conection.prepareStatement("SELECT * FROM usuario");
+            stmt = conection.prepareStatement("SELECT * FROM v_usuario");
             result = stmt.executeQuery();
 
             while (result.next()) {
@@ -120,7 +122,7 @@ public class UserDAO extends Connect implements IUser {
 
         try {
             conection = this.getConnection();
-            stmt = conection.prepareStatement("SELECT * FROM usuario WHERE idusuario = ?");
+            stmt = conection.prepareStatement("SELECT * FROM v_usuario WHERE idusuario = ?");
             stmt.setInt(1, idUser);
             result = stmt.executeQuery();
 
@@ -162,18 +164,18 @@ public class UserDAO extends Connect implements IUser {
 
         try {
             conection = this.getConnection();
-            this.sql = "UPDATE usuario SET idtipodocumento = ?, idrol = ?, nombre = ?,"
-                    + "apellido = ?, correo = ?, celular = ?, fechanacimiento = ? "
-                    + "WHERE idusuario = ?";
+            this.sql = "call sp_actualizarusuario(?,?,?,?,?,?,?,?,?,?)";
             this.stmt = conection.prepareStatement(this.sql);
             this.stmt.setString(1, user.getIdtipodocumento());
-            this.stmt.setString(2, user.getIdrol());
+            this.stmt.setString(2, user.getIdpais());
             this.stmt.setString(3, user.getNombre());
             this.stmt.setString(4, user.getApellido());
-            this.stmt.setString(5, user.getApellido());
+            this.stmt.setString(5, user.getCorreo());
             this.stmt.setString(6, user.getCelular());
-            this.stmt.setString(7, user.getFechanacimiento().equals("") ? null : user.getFechanacimiento());
-            this.stmt.setString(8, user.getIdusuario());
+            this.stmt.setString(7, Util.spaceToNull(user.getGenero()));
+            this.stmt.setString(8, Util.spaceToNull(user.getImagen()));
+            this.stmt.setString(9, Util.spaceToNull(user.getFechanacimiento()));
+            this.stmt.setString(10, user.getIdusuario());
 
             this.stmt.executeUpdate();
             this.operacion = true;
@@ -195,7 +197,7 @@ public class UserDAO extends Connect implements IUser {
 
         try {
             conection = this.getConnection();
-            sql = "DELETE  FROM usuario WHERE idusuario = ? ";
+            sql = "call sp_inhabilitarusuario(?) ";
             stmt = conection.prepareStatement(sql);
             stmt.setInt(1, idUser);
             stmt.executeUpdate();
@@ -218,7 +220,7 @@ public class UserDAO extends Connect implements IUser {
         UserVO userVO = new UserVO();
         try {
             conection = this.getConnection();
-            sql = "SELECT * FROM usuario WHERE correo = ? ";
+            sql = "SELECT * FROM v_usuario WHERE correo = ? ";
             stmt = conection.prepareStatement(sql);
             stmt.setString(1, email);
             result =  stmt.executeQuery();

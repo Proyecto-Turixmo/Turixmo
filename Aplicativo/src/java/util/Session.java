@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import vo.UserSessionVO;
+import vo.UserVO;
 
 public class Session {
 
@@ -42,7 +43,7 @@ public class Session {
         }
     }
 
-    public static boolean add(HttpServletRequest request, String idusuario, String idrol, String correo, String imagen)
+    public static boolean add(HttpServletRequest request,UserVO user)
             throws ServletException, IOException {
 
         boolean estado = false;
@@ -51,10 +52,12 @@ public class Session {
 
             UserSessionVO usersession = new UserSessionVO();
 
-            usersession.setIdusuario(idusuario);
-            usersession.setIdrol(idrol);
-            usersession.setCorreo(correo);
-            usersession.setImagen(imagen);
+            usersession.setIdusuario(user.getIdusuario());
+            usersession.setIdrol(user.getIdrol());
+            usersession.setNombre(user.getNombre());
+            usersession.setApellido(user.getApellido());
+            usersession.setCorreo(user.getCorreo());
+            usersession.setImagen(Util.nullToSpace(user.getImagen()));
 
             if (session.getAttribute(name) == null) {
                 session.setAttribute(name, usersession);
@@ -102,8 +105,33 @@ public class Session {
         }
         return usersession;
     }
+        
+    public static boolean set(HttpServletRequest request,UserVO user)
+            throws ServletException, IOException {
 
-    
+        boolean estado = false;
+        try {
+            
+            HttpSession session = (HttpSession) request.getSession(true); //inicia el objeto de session
+            UserSessionVO miuser = (UserSessionVO) session.getAttribute(name); // trae los datos del objeto eb especifico
+            UserSessionVO usersession = new UserSessionVO(); //creo el objeto que reinsertare
+
+            usersession.setIdusuario(miuser.getIdusuario());
+            usersession.setIdrol(miuser.getIdrol());
+            usersession.setNombre(user.getNombre());
+            usersession.setApellido(user.getApellido());
+            usersession.setCorreo(user.getCorreo());
+            usersession.setImagen(Util.nullToSpace(user.getImagen()));
+
+            if (session.getAttribute(name) != null) {
+                session.setAttribute(name, usersession);
+                estado = true;
+            }
+        } catch (Exception e) {
+            Logger.getLogger(Session.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return estado;
+    }
     
     public static boolean drop(HttpServletRequest request) throws ServletException, IOException {
         boolean estado = false;

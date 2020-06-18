@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import models.UserModel;
 import util.Session;
+import util.Util;
 import vo.UserVO;
 
 /**
@@ -87,19 +88,16 @@ public class AuthController extends HttpServlet {
                 UserModel user = new UserModel();
                 UserVO userResult = user.validate(userVO.getCorreo(),userVO.getContrasena());
                   if(userResult != null){
-                      Session.add(request,userResult.getIdusuario(),
-                                          userResult.getIdrol(), 
-                                          userResult.getCorreo(),
-                                          userResult.getImagen());
-                  Session.validateOutside(request, response);
+                      Session.add(request,userResult);
+                      Session.validateOutside(request, response);
                   }else{
+                      this.type = "danger";
                      this.message = "Usuario y/o contraseña Incorrectos.";
                   }
             } else {
                 this.message = "Debes rellenar todos campos.";
             }
         }else{
-        
                 this.message = "Debes rellenar todos campos.";
         }
        request.setAttribute("type",this.type);
@@ -126,8 +124,9 @@ public class AuthController extends HttpServlet {
         userVO.setCorreo(request.getParameter("correo"));
         userVO.setContrasena(request.getParameter("contrasena"));
         userVO.setCelular(request.getParameter("celular"));
-        userVO.setFechanacimiento(request.getParameter("fechaNacimiento") == null ? "" : request.getParameter("fechaNacimiento"));
+        userVO.setFechanacimiento(Util.nullToSpace(request.getParameter("fechaNacimiento")));
         userVO.setFecharegistro(formateador.format(fecha));
+        userVO.setInhabilitado("0");
 
         if (user.create(userVO)) {
 

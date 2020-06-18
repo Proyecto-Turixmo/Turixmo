@@ -1,4 +1,4 @@
-package controllers;
+ package controllers;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -15,6 +15,7 @@ import models.UserModel;
 import vo.UserSessionVO;
 import vo.UserVO;
 import util.Session;
+import util.Util;
 
 @WebServlet(name = "UserController",
         urlPatterns = {"/UserNew", "/UserGetall", "/UserGetbyid", "/closeSession",
@@ -35,7 +36,7 @@ public class UserController extends HttpServlet {
                 request.getRequestDispatcher("views/pages/user/list.jsp").forward(request, response);
                 break;
             case "/UserNew":
-                request.getRequestDispatcher("views/pages/user/create.jsp").forward(request, response);
+                request.getRequestDispatcher("views/pages/user/update.jsp").forward(request, response);
                 break;
             case "/UserGetbyid":
                 this.getUserById(request, response);
@@ -88,8 +89,9 @@ public class UserController extends HttpServlet {
         userVO.setCorreo(request.getParameter("correo"));
         userVO.setContrasena(request.getParameter("contrasena"));
         userVO.setCelular(request.getParameter("celular"));
-        userVO.setFechanacimiento(request.getParameter("fechaNacimiento") == null ? "" : request.getParameter("fechaNacimiento"));
+        userVO.setFechanacimiento(Util.nullToSpace(request.getParameter("fechaNacimiento")));
         userVO.setFecharegistro(formateador.format(fecha));
+        userVO.setInhabilitado("0");
 
         if (user.create(userVO)) {
 
@@ -101,7 +103,7 @@ public class UserController extends HttpServlet {
         }
         request.setAttribute("message", this.message);
         request.setAttribute("type", this.type);
-        request.getRequestDispatcher("views/pages/user/create.jsp").forward(request, response);
+        request.getRequestDispatcher("views/pages/user/update.jsp").forward(request, response);
 
     }
 
@@ -111,25 +113,37 @@ public class UserController extends HttpServlet {
         int iduser = Integer.parseInt(request.getParameter("id"));
         UserModel user = new UserModel();
         request.setAttribute("user", user.getById(iduser));
-        request.getRequestDispatcher("views/pages/user/create.jsp").forward(request, response);
+        request.getRequestDispatcher("views/pages/user/update.jsp").forward(request, response);
 
     }
 
     private void update(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        Date fecha = new Date();
+        DateFormat formateador = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+
         UserModel user = new UserModel();
         UserVO userVO = new UserVO();
+        
         userVO.setIdusuario(request.getParameter("id"));
         userVO.setIdtipodocumento(request.getParameter("tipoDocumento"));
+        userVO.setIdpais("1");
         userVO.setIdrol(request.getParameter("rol"));
         userVO.setNombre(request.getParameter("nombre"));
         userVO.setApellido(request.getParameter("apellido"));
         userVO.setCorreo(request.getParameter("correo"));
         userVO.setCelular(request.getParameter("celular"));
-        userVO.setFechanacimiento(request.getParameter("fechaNacimiento") == null ? "" : request.getParameter("fechaNacimiento"));
+        userVO.setGenero(request.getParameter("genero"));
+        userVO.setFechanacimiento(Util.nullToSpace(request.getParameter("fechaNacimiento")));
+        userVO.setFecharegistro(formateador.format(fecha));
+        userVO.setInhabilitado("0");
 
         if (user.updateById(userVO)) {
+            if(Session.get(request).getIdusuario().equals(userVO.getIdusuario())){
+                Session.set(request, userVO);
+            }
             type = "success";
             message = "El usuario se ha Actualizado correctamente";
         } else {

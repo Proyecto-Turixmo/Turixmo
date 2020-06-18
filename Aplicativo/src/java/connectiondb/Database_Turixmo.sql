@@ -54,6 +54,7 @@ token VARCHAR(100) NULL,
 imagen varchar(200) NULL,
 fechanacimiento DATE NULL,
 fecharegistro DATETIME  NOT NULL,
+inhabilitado BOOLEAN NOT NULL,
 primary key(idusuario),
 foreign key (idtipodocumento) references tipodocumento (idtipodocumento),
 foreign key (idrol) references rol (idrol)
@@ -93,6 +94,7 @@ correo VARCHAR(100) NOT NULL,
 sitioweb VARCHAR(100) NULL,
 descripcion MEDIUMTEXT NULL,
 fecharegistro DATETIME NOT NULL,
+inhabilitado BOOLEAN NOT NULL,
 primary key (idhotel),
 foreign key (idusuario) references usuario (idusuario),
 foreign key (idciudad) references ciudad (idciudad)
@@ -104,13 +106,14 @@ idtipohabitacion INT NOT NULL ,
 idhotel INT NOT NULL , 
 numerohabitacion VARCHAR(50) NULL,
 cantidadmaxpersonas INT NOT NULL,
-cantidadmimpersonas INT NOT NULL,
+cantidadminpersonas INT NOT NULL,
 precionochepersona FLOAT NOT NULL,
 preciobase FLOAT  NOT NULL,
 numeropiso VARCHAR(50) NULL,
 descripcion mediumtext NULL,
 disponibilidad BOOLEAN NOT NULL,
 fecharegistro DATETIME NOT NULL,
+inhabilitado BOOLEAN NOT NULL,
 primary key (idhabitacion),
 foreign key (idtipohabitacion) references tipohabitacion (idtipohabitacion),
 foreign key (idhotel) references hotel (idhotel)
@@ -136,6 +139,7 @@ descripcion TEXT NULL,
 fechaentrada DATETIME  NOT NULL,
 fechasalida DATETIME  NOT NULL,
 fechareserva DATETIME  NOT NULL,
+inhabilitado BOOLEAN NOT NULL,
 primary key(idreserva),
 foreign key (idusuario) references usuario (idusuario),
 foreign key (idestadoreserva) references estadoreserva (idestadoreserva)
@@ -191,8 +195,53 @@ fecharegistro DATETIME NOT NULL,
 primary key (idcomentario),
 foreign key (idhabitacion) references habitacion (idhabitacion)
 );
+-- creacion de vistas
+create view v_usuario as
+select * from usuario where inhabilitado = 0;
 
+create view v_hotel as 
+select * from hotel where inhabilitado = 0; ;
 
+create view v_habitacion as 
+select * from habitacion where inhabilitado = 0;
+
+-- creacion de procedimientos almacenados
+-- insercion de usuario
+create procedure sp_insertarusuario( idusuario int, idtipodocumento int, numerodocumento varchar(100),
+									idpais int, idrol int,nombre varchar(100) ,apellido varchar(100),
+                                    correo varchar(100),contrasena varchar(100),celular varchar(100),
+                                    genero boolean,token varchar(100),imagen varchar(200),
+                                    fechanacimiento date,fecharegistro datetime, inhabilidado boolean )
+insert into v_usuario values(idusuario,idtipodocumento,numerodocumento,idpais,
+                             idrol,nombre,apellido,correo,contrasena, celular,
+                             genero,token,imagen,fechanacimiento,fecharegistro,inhabilitado); 
+-- actualizar el usuario
+create procedure sp_actualizarusuario(idtipodocumento int,idpais int,nombre varchar(100),apellido varchar(100),
+									correo varchar(100),celular varchar(100),genero boolean, 
+                                    imagen varchar(100),fechanacimiento date,idusuario int)
+update v_usuario set idtipodocumento = idtipodocumento, idpais = idpais,nombre = nombre,
+				     apellido = apellido,correo = correo,celular = celular,genero = genero,
+                     imagen = imagen ,fechanacimiento = fechanacimiento
+			where idusuario = idusuario;
+-- inhabilitar el usuario
+create procedure sp_inhabilitarusuario (idusuario int)
+		update v_usuario set inhabilitado = 1 where idusuario = idusuario;
+        
+-- insercion de hotel
+create procedure sp_insertarhotel(idhotel int,idusuario int,idciudad int,estrella int,
+								  nombre varchar(200),direccion varchar(200),telefono varchar(200),
+								  celular varchar(200),correo varchar(200),sitioweb varchar(200),
+								  descripcion mediumtext,fecharegistro datetime,inhabilitado boolean)
+insert into v_hotel values(idhotel,idusuario,idciudad,estrella,nombre,direccion,
+							telefono,celular,correo,sitioweb,descripcion,fecharegistro,inhabilitado);                             
+-- insercion de habitacion
+create procedure sp_insertarhabitacion(idhabitacion int,idtipohabitacion int,idhotel int,numerohabitacion varchar(50),
+									   cantidadmaxpersonas int,cantidadminpersonas int,precionochepersona float,
+                                       preciobase float,numeropiso varchar(50),descripcion mediumtext,disponibilidad boolean,
+                                       fecharegistro datetime,inhabilitado boolean)
+insert into v_habitacion values(idhabitacion,idtipohabitacion,idhotel,numerohabitacion,cantidadmaxpersonas,
+								cantidadminpersonas,precionochepersona,preciobase,numeropiso,descripcion,
+                                disponibilidad,fecharegistro,inhabilitado);
 
 -- insercion de datos basicos
 -- roles o actores del sistema

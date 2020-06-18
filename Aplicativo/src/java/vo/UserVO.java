@@ -13,13 +13,13 @@ package vo;
 public class UserVO {
    private String idusuario = "", idtipodocumento = "",numerodocumento ="",idpais="",idrol="",
                   nombre="",apellido="",correo="",contrasena="",celular="",genero="",token="",
-                  imagen="",fechanacimiento="",fecharegistro="";
+                  imagen="",fechanacimiento="",fecharegistro="",inhabilitado = "";
 
     public UserVO() {}
 
     public UserVO(String idusuario,String idtipodocumento,String numerodocumento, String idpais,String idrol,
                 String nombre,String apellido,String correo,String contrasena,String celular,String genero,
-                String token,String imagen,String fechanacimiento,String fecharegistro) {
+                String token,String imagen,String fechanacimiento,String fecharegistro,String inhabilitado) {
         
         this.idusuario = idusuario;
         this.idtipodocumento = idtipodocumento;
@@ -36,6 +36,7 @@ public class UserVO {
         this.imagen = imagen;
         this.fechanacimiento = fechanacimiento;
         this.fecharegistro = fecharegistro;
+        this.inhabilitado = inhabilitado;
     }
 
     public String getIdusuario() {
@@ -156,6 +157,14 @@ public class UserVO {
 
     public void setFecharegistro(String fecharegistro) {
         this.fecharegistro = fecharegistro;
+    }
+
+    public String getInhabilitado() {
+        return inhabilitado;
+    }
+
+    public void setInhabilitado(String inhabilitado) {
+        this.inhabilitado = inhabilitado;
     }
 
   

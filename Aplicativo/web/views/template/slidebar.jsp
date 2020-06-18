@@ -1,4 +1,6 @@
-
+<%@page import="util.Session" %>
+<% out.print(Session.get(request).getCorreo()); %> 
+<% out.print(Session.get(request).getIdusuario()); %>
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
@@ -12,10 +14,16 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="<%=ruta%>dist/img/avatar5.png" class="img-circle elevation-2" alt="User Image">
+            <img src="<%=(Session.get(request).getImagen().equals(""))? ruta+"dist/img/avatar5.png": Session.get(request).getImagen() %>" id=" <%=Session.get(request).getIdusuario()%>" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Juan Perez</a>
+          <a href="#" class="d-block"><span class="small"><% out.print(Session.get(request).getNombre()+ " "+Session.get(request).getApellido()); %></span> </a>
+          <div class="text-white">
+              <%=Session.get(request).getIdrol().equals("3")? "Turista":""%>
+              <%=Session.get(request).getIdrol().equals("2")? "Propietario":""%>
+              <%=Session.get(request).getIdrol().equals("1")? "Administrador":""%>
+              <span class="d-block small"><% out.print(Session.get(request).getCorreo()); %></span> 
+          </div>
         </div>
       </div>
 
@@ -54,6 +62,7 @@
               </li>
             </ul>-->
           </li>
+          
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
