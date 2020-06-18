@@ -6,9 +6,13 @@
 <%@include file="../../template/slidebar.jsp" %>
 
 <%@page import="java.util.ArrayList" %>
-<%@page import="models.UserModel" %>
-<%@page import="vo.UserVO" %>
-
+<%@page import="models.HotelModel" %>
+<%@page import="vo.HotelVO" %>
+<%
+            HotelVO hotelVO = new HotelVO();
+            HotelModel hotel = new HotelModel();
+            ArrayList<HotelVO> hoteles = hotel.getAll(Integer.parseInt(Session.get(request).getIdusuario()));
+%>
 
 
 
@@ -47,36 +51,30 @@
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Numero Doc</th>
-                                        <th>Rol</th>
-                                        <th>Nombre completo</th>
-                                        <th>Correo</th>
+                                        <th>Nombre</th>
+                                        <th>Direccion</th>
                                         <th>Celular</th>
-                                        <th>Imagen</th>
+                                        <th>Correo</th>
+                                        <th>Sitio web</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <%
-                                        UserVO userVO = new UserVO();
-                                        UserModel user = new UserModel();
-                                        ArrayList<UserVO> users = user.getAll();
-
-                                        for (int i = 0; i < users.size(); i++) {
-                                            userVO = users.get(i);
-                                    %>
+                                <%
+                                    for (int i = 0; i < hoteles.size(); i++) {
+                                        hotelVO = hoteles.get(i);
+                                %>
                                     </tr>
-                                <td><%= userVO.getNumerodocumento()%></td>
-                                <td><%= userVO.getIdrol().equals("1") ? "Propietario" : userVO.getIdrol().equals("2")? "Admin" : "Turista"%></td>
-                                <td><%= userVO.getNombre() + " " + userVO.getApellido()%></td>
-                                <td><%= userVO.getCorreo()%></td>
-                                <td><%= userVO.getCelular()%></td>
-                                <td><img src="<%= userVO.getImagen() == "" ? "" : "./libs/dist/img/avatar5.png"%>" class="img-circle img-size-50"></td>
+                                <td><%= hotelVO.getNombre()%></td>
+                                <td><%= hotelVO.getDireccion()%></td>
+                                <td><%= hotelVO.getCelular()%></td>
+                                <td><%= hotelVO.getCorreo()%></td>
+                                <td><% out.print(!hotelVO.getSitioweb().equals("") ? "<a href="+ hotelVO.getSitioweb()+">Sitio</a>": ""); %></td>
                                 <td >
                                     <div class="d-flex align-content-center">
-                                        <a href="UserEdit?id=<%=userVO.getIdusuario()%>" class="btn btn-default" ><i class="fas fa-edit"></i></a>
-                                        <form action="UserDisable" method="post">
-                                            <input type="hidden" name="id" value="<%=userVO.getIdusuario()%>">
+                                        <a href="HotelEdit?id=<%=hotelVO.getIdhotel()%>" class="btn btn-default" ><i class="fas fa-edit"></i></a>
+                                        <form action="HotelDisable" method="post">
+                                            <input type="hidden" name="id" value="<%=hotelVO.getIdhotel()%>">
                                            <button type="submit" class="btn btn-default ml-1" onclick="return confirm('Esta seguro de eliminar este registro?');" ><i class="fas fa-trash"></i></button>
                                         </form>
                                     </div>
@@ -86,12 +84,11 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>Numero Doc</th>
-                                        <th>Rol</th>
-                                        <th>Nombre completo</th>
-                                        <th>Correo</th>
+                                        <th>Nombre</th>
+                                        <th>Direccion</th>
                                         <th>Celular</th>
-                                        <th>Imagen</th>
+                                        <th>Correo</th>
+                                        <th>Sitio web</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </tfoot>

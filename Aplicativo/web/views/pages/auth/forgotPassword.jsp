@@ -19,7 +19,7 @@
                                 <a href="#" class="btn btn-primary btn-block">Recuperar mi contraseña</a>
                             </div>
                             <div class="form-group">
-                                <a href="auth" class=" my-n1 ">Iniciar Sesion</a>
+                                <a href="login" class=" my-n1 ">Iniciar Sesion</a>
                             </div>
                         </div>
 <!--                 <hr class="py-0 pb-n2">

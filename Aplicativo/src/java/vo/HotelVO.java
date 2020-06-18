@@ -1,24 +1,29 @@
 
 package vo;
 
-public class Hotel {
-    int idhotel;
-    String idusuario;
-    String idciudad;
-    String estrella;
-    String nombre;
-    String direccion;
-    String telefono;
-    String celular;
-    String correo;
-    String sitioweb;
-    String descripcion;
-    String fecharegistro;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-    public Hotel() {
-    }
+public class HotelVO {
+    String idhotel = "";
+    String idusuario = "";
+    String idciudad = "";
+    String estrella= "";
+    String nombre= "";
+    String direccion= "";
+    String telefono= "";
+    String celular= "";
+    String correo= "";
+    String sitioweb= "";
+    String descripcion= "";
+    String fecharegistro= "";
+    String inhabilitado= "";
 
-    public Hotel(int idhotel, String idusuario, String idciudad, String estrella, String nombre, String direccion, String telefono, String celular, String correo, String sitioweb, String descripcion, String fecharegistro) {
+    public HotelVO() {}
+
+
+    public HotelVO(String idhotel, String idusuario, String idciudad, String estrella, String nombre, String direccion, String telefono, String celular, String correo, String sitioweb, String descripcion, String fecharegistro) {
         this.idhotel = idhotel;
         this.idusuario = idusuario;
         this.idciudad = idciudad;
@@ -32,12 +37,21 @@ public class Hotel {
         this.descripcion = descripcion;
         this.fecharegistro = fecharegistro;
     }
+    
+        public String getInhabilitado() {
+        return inhabilitado;
+    }
 
-    public int getIdhotel() {
+    public void setInhabilitado(String inhabilitado) {
+        this.inhabilitado = inhabilitado;
+    }
+
+
+    public String getIdhotel() {
         return idhotel;
     }
 
-    public void setIdhotel(int idhotel) {
+    public void setIdhotel(String idhotel) {
         this.idhotel = idhotel;
     }
 

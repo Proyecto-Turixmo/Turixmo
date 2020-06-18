@@ -229,11 +229,23 @@ create procedure sp_inhabilitarusuario (idusuario int)
         
 -- insercion de hotel
 create procedure sp_insertarhotel(idhotel int,idusuario int,idciudad int,estrella int,
-								  nombre varchar(200),direccion varchar(200),telefono varchar(200),
-								  celular varchar(200),correo varchar(200),sitioweb varchar(200),
+								  nombre varchar(100),direccion varchar(100),telefono varchar(100),
+								  celular varchar(100),correo varchar(100),sitioweb varchar(100),
 								  descripcion mediumtext,fecharegistro datetime,inhabilitado boolean)
 insert into v_hotel values(idhotel,idusuario,idciudad,estrella,nombre,direccion,
-							telefono,celular,correo,sitioweb,descripcion,fecharegistro,inhabilitado);                             
+							telefono,celular,correo,sitioweb,descripcion,fecharegistro,inhabilitado);
+-- actualizar hotel
+create procedure sp_actualizarhotel(idciudad int,estrella int, nombre varchar(100),direccion varchar(100),
+									telefono varchar(100), celular varchar(100),
+                                    correo varchar(100),sitioweb varchar(100),descripcion mediumtext,idhotel int,idusuario int)
+update v_hotel as h set h.idciudad = idciudad,h.estrella = estrella,h.nombre = nombre,h.direccion = direccion,
+						h.telefono = telefono,h.celular = celular,h.correo = correo,h.sitioweb = sitioweb,h.descripcion =descripcion
+		where h.idhotel = idhotel and h.idusuario = idusuario;
+        
+-- inhabilitar el hotel
+create procedure sp_inhabilitarhotel (idhotel int,idusuario int)
+		update v_hotel as h set inhabilitado = 1 where h.idhotel = idhotel and h.idusuario = idusuario;
+        
 -- insercion de habitacion
 create procedure sp_insertarhabitacion(idhabitacion int,idtipohabitacion int,idhotel int,numerohabitacion varchar(50),
 									   cantidadmaxpersonas int,cantidadminpersonas int,precionochepersona float,

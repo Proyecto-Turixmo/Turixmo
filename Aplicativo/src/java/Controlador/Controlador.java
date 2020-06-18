@@ -1,7 +1,7 @@
 
 package Controlador;
 
-import vo.Hotel;
+import vo.HotelVO;
 import dao.HotelDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,7 +17,7 @@ public class Controlador extends HttpServlet {
     String listar="vistas/listar.jsp";
     String add="vistas/add.jsp";
     String edit="vistas/edit.jsp";
-    Hotel h=new Hotel();
+    HotelVO h=new HotelVO();
     HotelDAO dao=new HotelDAO();
     int idhotel;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

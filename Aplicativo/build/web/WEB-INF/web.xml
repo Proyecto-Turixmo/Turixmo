@@ -4,9 +4,17 @@
         <servlet-name>Hotel</servlet-name>
         <servlet-class>models.vo.Hotel</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>HotelController</servlet-name>
+        <servlet-class>controllers.HotelController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Hotel</servlet-name>
         <url-pattern>/Hotel</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HotelController</servlet-name>
+        <url-pattern>/HotelController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
