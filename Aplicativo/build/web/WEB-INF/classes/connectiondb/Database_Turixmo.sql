@@ -219,13 +219,13 @@ insert into v_usuario values(idusuario,idtipodocumento,numerodocumento,idpais,
 create procedure sp_actualizarusuario(idtipodocumento int,idpais int,nombre varchar(100),apellido varchar(100),
 									correo varchar(100),celular varchar(100),genero boolean, 
                                     imagen varchar(100),fechanacimiento date,idusuario int)
-update v_usuario set idtipodocumento = idtipodocumento, idpais = idpais,nombre = nombre,
+update v_usuario as u set idtipodocumento = idtipodocumento, idpais = idpais,nombre = nombre,
 				     apellido = apellido,correo = correo,celular = celular,genero = genero,
                      imagen = imagen ,fechanacimiento = fechanacimiento
-			where idusuario = idusuario;
+			where u.idusuario = idusuario;
 -- inhabilitar el usuario
 create procedure sp_inhabilitarusuario (idusuario int)
-		update v_usuario set inhabilitado = 1 where idusuario = idusuario;
+		update v_usuario as u set inhabilitado = 1 where u.idusuario = idusuario;
         
 -- insercion de hotel
 create procedure sp_insertarhotel(idhotel int,idusuario int,idciudad int,estrella int,
