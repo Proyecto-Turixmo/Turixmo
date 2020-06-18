@@ -38,7 +38,7 @@
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">Registrarme!</button><br>
-                        <div class="text-center w-100 mb-2 border-bottom">
+                        <div class="text-center w-100 mb-2 border-bottom ">
                              <a href="login">Iniciar Sesion</a>
                         </div>
                         
