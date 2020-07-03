@@ -1,38 +1,36 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package connectiondb;
 import interfaces.IConnection;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import util.Config;
 
-/**
- *
- * @author andre
- */
-public class Connect implements IConnection{
+
+public class Connect  implements IConnection{
     
-    private final String DBDRIVER, DBUSER, DBPASSWORD, DBNAME, DBURL;
     private Connection connect;
+    
+    protected Connection connection = null;
+    protected PreparedStatement stmt = null;
+    protected ResultSet result = null;
+    protected boolean operation = false;
 
-    public Connect() {
+    public Connect() {}
 
-        DBDRIVER = "com.mysql.jdbc.Driver";
-        DBUSER = "root";
-        DBPASSWORD = "monserrate1010";
-        DBNAME = "proyecto_turixmo";
-        DBURL = "jdbc:mysql://localhost:3306/" + DBNAME + "?useSSL=false";
+    @Override
+    public void createConnection() {
 
         try {
-            Class.forName(DBDRIVER).newInstance();
-            connect = DriverManager.getConnection(DBURL, DBUSER, DBPASSWORD);
+            Class.forName(Config.getDBDRIVER()).newInstance();
+            connect = DriverManager.getConnection(Config.getDBURL(), Config.getDBUSER(), Config.getDBPASSWORD());
 
         } catch (Exception e) {
             System.out.print("Error " + e);
         }
+        
     }
 
     @Override
@@ -48,7 +46,7 @@ public class Connect implements IConnection{
                 
     }
     
+ 
     
  
-
 }

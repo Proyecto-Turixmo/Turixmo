@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -37,6 +37,7 @@ public class HotelDAO extends Connect implements IHotel {
     @Override
     public boolean create(HotelVO hotel) {
         try {
+            this.createConnection();
             this.conection = this.getConnection();
             this.sql = "call sp_insertarhotel(?,?,?,?,?,?,?,?,?,?,?,?,?)";
             this.stmt = conection.prepareStatement(sql);
@@ -75,6 +76,7 @@ public class HotelDAO extends Connect implements IHotel {
         ArrayList<HotelVO> hoteles = new ArrayList<>();
 
         try {
+            this.createConnection();
             conection = this.getConnection();
             this.stmt = conection.prepareStatement("SELECT * FROM v_hotel where idusuario = ?");
             this.stmt.setInt(1, idUser);
@@ -116,6 +118,7 @@ public class HotelDAO extends Connect implements IHotel {
 
         HotelVO hotelVO = new HotelVO();
         try {
+            this.createConnection();
             conection = this.getConnection();
             stmt = conection.prepareStatement("SELECT * FROM v_hotel WHERE idhotel = ? and idusuario = ? ");
             stmt.setInt(1, idHotel);
@@ -155,6 +158,7 @@ public class HotelDAO extends Connect implements IHotel {
     @Override
     public boolean update(HotelVO hotel) {
          try {
+             this.createConnection();
             conection = this.getConnection();
             this.sql = "call sp_actualizarhotel(?,?,?,?,?,?,?,?,?,?,?)";
             this.stmt = conection.prepareStatement(this.sql);
@@ -189,6 +193,7 @@ public class HotelDAO extends Connect implements IHotel {
     @Override
     public boolean disable(int idHotel,int idUser) {
         try {
+            this.createConnection();
             conection = this.getConnection();
             sql = "call sp_inhabilitarhotel(?,?)";
             stmt = conection.prepareStatement(sql);

@@ -1,17 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package util;
 
-/**
- *
- * @author andre
- */
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Util {
 
-    public static String nullToSpace(String dato) {
+  public static String nullToSpace(String dato) {
 
         if (dato == null) {
             dato = "";
@@ -26,5 +22,25 @@ public class Util {
         }
         return dato;
     }
+    
+    public static String toString(int dato) {
+
+        return Integer.toString(dato); 
+    }
+    
+    public static int toNumber(String dato) {
+            
+        return Integer.parseInt(dato);
+    }
+    
+    
+    public static String getDateTime() {
+        
+        Date fecha = new Date();
+        DateFormat formateador = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        return formateador.format(fecha);
+    }
+
 
 }

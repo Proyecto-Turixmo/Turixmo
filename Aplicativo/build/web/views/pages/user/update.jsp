@@ -1,18 +1,29 @@
-<%@page import="util.Util"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@include file="../../template/header.jsp" %>
-<%@include file="../../template/navbar.jsp" %>
-<%@page import="vo.UserVO" %>
 
-<% UserVO user = (UserVO)request.getAttribute("user");
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%@page import="java.util.ArrayList"%>
+<%@page import="vo.DocumentTypeVO"%>
+<%@page import="util.Util"%>
+<%@page import="vo.UserVO" %>
+<%@page import="vo.RoleVO"%>
+
+
+<%
+   ArrayList<DocumentTypeVO> documentsTypesVO = (ArrayList<DocumentTypeVO>)request.getAttribute("documentstypes");
+   ArrayList<RoleVO> rolesVO = (ArrayList<RoleVO>)request.getAttribute("roles");
+     
+UserVO user = (UserVO)request.getAttribute("user");
        user = (user != null) ? user : new UserVO();
        user.setGenero(Util.nullToSpace(user.getGenero()));
+       
+       
 %>
+<%@include file="../../template/header.jsp" %>
+<%@include file="../../template/navbar.jsp" %>
 
 
-  <!-- Content Wrapper. Contains page content -->
+
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -26,82 +37,85 @@
             </ol>
           </div>
         </div>
-      </div><!-- /.container-fluid -->
+      </div>
     </section>
 
-    <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          <!-- left column -->
           <div class="col-md-12">
-            <!-- jquery validation -->
             <div class="card card-default">
               <div class="card-header">
-                <h3 class="card-title">Registra tu usuario</small></h3>
+                <h3 class="card-title">Registra tu usuario </small></h3>
               </div>
-              <!-- /.card-header -->
-              <!-- form start -->
-              <form action="<%=(user.getIdusuario() != "") ? "UserUpdate": "UserCreate"%>" method="post">
+              <form action="<%=(user.getIdusuario() != "") ? "UserUpdate": "UserCreate"%>" method="post" enctype="multipart/form-data">
                    <% if(user.getIdusuario() != ""){%>
                    <input type="hidden" name="id" value="<%=user.getIdusuario()%>">
                    <%}%>
                 <div class="card-body">
                     <%@include file="../../template/showMessage.jsp" %>
                   <div class="form-group">
-                    <label for="tipoDocumento">Tipo documento</label>
+                    <label for="tipoDocumento">Tipo documento <span class="text-danger h5">*</span></label>
                     <select name="tipoDocumento" class="form-control" id="tipo-documento">
                         <option  selected>-- Selecciona un tipo --</option>
-                        <option <%=(user.getIdtipodocumento().equalsIgnoreCase("1"))?"selected": ""%> value="1">Cédula de ciudadania</option>
-                        <option <%=(user.getIdtipodocumento().equalsIgnoreCase("2"))?"selected": ""%> value="2">Cédula de extranjeria</option>
+                        <% for(DocumentTypeVO documentTypeVO : documentsTypesVO){%>
+                        <option 
+                            <%=(user.getIdtipodocumento().equalsIgnoreCase(documentTypeVO.getId()))?"selected": ""%> 
+                            value="<%=documentTypeVO.getId()%>">
+                            <%=documentTypeVO.getName()%>
+                        </option>
+                    <%}%>
                     </select>
+                    
                   </div>
                     <div class="form-group">
-                    <label for="numeroDocumento">Numero de documento</label>
+                    <label for="numeroDocumento">Numero de documento <span class="text-danger h5">*</span></label>
                     <input type="text" <%=(user.getIdusuario() != "") ? "readonly": "name='numeroDocumento'"%>  value="<%=user.getNumerodocumento()%>" class="form-control" id="numeroDocumento" placeholder="Ingresa el numero de tu documento">
                   </div>
-                    <% if(user.getIdusuario().equals("")){%>
                     <div class="form-group">
-                    <label for="rol">Rol</label>
+                    <label for="rol">Rol <span class="text-danger h5">*</span></label>
                     <select name="rol" class="form-control" id="rol">
                         <option  >-- Selecciona un rol --</option>
-                        <option  value="1">Propietario</option>
-                        <option  value="2">Administrador</option>
-                        <option  value="3">Turista</option>
+                  <% for(RoleVO roleVO :rolesVO){%>
+                        <option  
+                        <%=(user.getIdrol().equalsIgnoreCase(roleVO.getId())) ? "selected" : ""%> 
+                        value="<%=roleVO.getId()%>">
+                        <%=roleVO.getName()%>    
+                        </option>
+                    <%}%>
                     </select>
                   </div>
-                    <%}%>
+
                     <div class="form-group">
-                    <label for="nombre">Nombre</label>
+                    <label for="nombre">Nombres <span class="text-danger h5">*</span> </label>
                     <input type="text" name="nombre" class="form-control" value="<%=user.getNombre()%>" id="nombre" placeholder="Ingresa tu nombre">
                   </div>                    
                   <div class="form-group">
-                    <label for="apellido">Apellidos</label>
+                    <label for="apellido">Apellidos <span class="text-danger h5">*</span></label>
                     <input type="text" name="apellido" class="form-control" value="<%=user.getApellido()%>" id="apellido" placeholder="Ingresa tus apellidos">
                   </div>
                     <div class="form-group">
-                    <label for="correo">Correo Electronico</label>
+                    <label for="correo">Correo Electronico <span class="text-danger h5">*</span></label>
                     <input type="email" name="correo" class="form-control" value="<%=user.getCorreo()%>" id="exampleInputEmail1" placeholder="Ingresa tu correo">
                   </div>
                     <% if(user.getIdusuario().equals("")){%>
                     <div class="form-group">
-                    <label for="contrasena">Contraseña</label>
+                    <label for="contrasena">Contraseña <span class="text-danger h5">*</span></label>
                     <input type="password" name="contrasena" class="form-control" id="contrasena" placeholder="*********">
                   </div>
                     <% } %>
                     <div class="form-group">
-                    <label for="celular">Celular</label>
+                    <label for="celular">Celular <span class="text-danger h5">*</span></label>
                     <input type="text" name="celular" class="form-control" value="<%=user.getCelular()%>" id="exampleInputEmail1" placeholder="Ingresa un numero de contacto">
                   </div>
                     <div class="form-group">
-                    <label for="imagen">Imagen (opcional)</label>
+                    <label for="imagen">Imagen </label>
                     <input type="file" name="imagen" class="form-control" id="imagen">
                   </div>
                     <div class="form-group">
-                    <label for="fecha-nacimiento">Nacimiento (opcional)</label>
+                    <label for="fecha-nacimiento">Nacimiento </label>
                     <input type="date" name="fecha-nacimiento" class="form-control" value="<%=user.getFechanacimiento()%>" id="fecha-nacimiento" placeholder="Enter email">
                   </div>
-       
                   <div class="form-group">
                   <label for="fecha-nacimiento">Sexo (opcional)</label>
                   <div class="form-control">
@@ -120,25 +134,17 @@
                   </div>
                   </div>
                   </div>
-                <!-- /.card-body -->
                 <div class="card-footer">
                   <button type="submit" class="btn btn-<%=(user.getIdusuario() != "") ? "success": "primary"%> btn-block"><%=(user.getIdusuario() != "") ? "Actualizar!": "Registrarme!"%></button>
                 </div>
               </form>
             </div>
-            <!-- /.card -->
             </div>
-          <!--/.col (left) -->
-          <!-- right column -->
           <div class="col-md-6">
-
           </div>
-          <!--/.col (right) -->
         </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
+      </div>
     </section>
-    <!-- /.content -->
   </div>
 
 <%@include file="../../template/slidebar.jsp" %>

@@ -7,19 +7,16 @@
 package models;
 
 import dao.HotelDAO;
-import dao.UserDAO;
 import interfaces.IHotel;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import vo.HotelVO;
-import vo.UserVO;
-
 /**
  *
  * @author andre
  */
-public class HotelModel implements IHotel {
+public class HotelModel  implements IHotel{
     
     public HotelModel() {
         
@@ -34,7 +31,7 @@ public class HotelModel implements IHotel {
         try {
             result = hotelDAO.create(hotel);
           } catch (Exception e) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(HotelDAO.class.getName()).log(Level.SEVERE, null, e);
         }
         return result;
     }
@@ -47,7 +44,7 @@ public class HotelModel implements IHotel {
         try {
             result = hotelDAO.getAll(idUser);
         } catch (Exception e) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(HotelDAO.class.getName()).log(Level.SEVERE, null, e);
         }
         return result;
     
@@ -61,7 +58,7 @@ public class HotelModel implements IHotel {
         try {
             result = hotelDAO.edit(idHotel,idUsuario);
         } catch (Exception e) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(HotelDAO.class.getName()).log(Level.SEVERE, null, e);
         }
         return result;
     
@@ -75,7 +72,7 @@ public class HotelModel implements IHotel {
         try {
             result = hotelDAO.update(hotel);
         } catch (Exception e) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(HotelDAO.class.getName()).log(Level.SEVERE, null, e);
         }
         return result;
     }
@@ -89,7 +86,7 @@ public class HotelModel implements IHotel {
         try {
             result = hotelDAO.disable(idHotel,idUser);
         } catch (Exception e) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(HotelDAO.class.getName()).log(Level.SEVERE, null, e);
         }
         return result;
     }

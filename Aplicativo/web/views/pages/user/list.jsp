@@ -6,22 +6,21 @@
 <%@include file="../../template/slidebar.jsp" %>
 
 <%@page import="java.util.ArrayList" %>
-<%@page import="models.UserModel" %>
-<%@page import="vo.UserVO" %>
+<%@page import="dto.UserDTO"%>
+
+<%
+    ArrayList<UserDTO> usersDTO = (ArrayList<UserDTO>) request.getAttribute("users");
+    UserDTO userDTO = new UserDTO();
+%>
 
 
 
 
-
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">
-                    <!--<h1>Registrar Usuario</h1>-->
-                </div>
+                <div class="col-sm-6"></div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -29,10 +28,10 @@
                     </ol>
                 </div>
             </div>
-        </div><!-- /.container-fluid -->
+        </div>
     </section>
 
-    <!-- Main content -->
+  
     <section class="content">
         <div class="container-fluid">
             <div class="row">
@@ -42,11 +41,12 @@
                         <div class="card-header">
                             <h3 class="card-title">Listado de usuarios</h3>
                         </div>
-                        <!-- /.card-header -->
+      
                         <div class="card-body">
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
+                                        <th>Tipo</th>
                                         <th>Numero Doc</th>
                                         <th>Rol</th>
                                         <th>Nombre completo</th>
@@ -57,27 +57,24 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <%
-                                        UserVO userVO = new UserVO();
-                                        UserModel user = new UserModel();
-                                        ArrayList<UserVO> users = user.getAll();
-
-                                        for (int i = 0; i < users.size(); i++) {
-                                            userVO = users.get(i);
-                                    %>
-                                    </tr>
-                                <td><%= userVO.getNumerodocumento()%></td>
-                                <td><%= userVO.getIdrol().equals("1") ? "Propietario" : userVO.getIdrol().equals("2")? "Admin" : "Turista"%></td>
-                                <td><%= userVO.getNombre() + " " + userVO.getApellido()%></td>
-                                <td><%= userVO.getCorreo()%></td>
-                                <td><%= userVO.getCelular()%></td>
-                                <td><img src="<%= userVO.getImagen() == "" ? "" : "./libs/dist/img/avatar5.png"%>" class="img-circle img-size-50"></td>
-                                <td >
+                            <%
+                                for (int i = 0; i < usersDTO.size(); i++) {
+                                    userDTO = usersDTO.get(i);
+                            %>
+                                  </tr>
+                                <td><%= userDTO.getDocument().getName()%></td>
+                                <td><%= userDTO.getUser().getNumerodocumento()%></td>
+                                <td><%= userDTO.getRole().getName()%></td>
+                                <td><%= userDTO.getUser().getNombre() + " " + userDTO.getUser().getApellido()%></td>
+                                <td><%= userDTO.getUser().getCorreo()%></td>
+                                <td><%= userDTO.getUser().getCelular()%></td>
+                                <td><img src="<%= userDTO.getUser().getImagen() == "" ? "" : "./libs/dist/img/avatar5.png"%>" class="img-circle img-size-50"></td>
+                                <td>
                                     <div class="d-flex align-content-center">
-                                        <a href="UserEdit?id=<%=userVO.getIdusuario()%>" class="btn btn-default" ><i class="fas fa-edit"></i></a>
+                                        <a href="UserEdit?id=<%=userDTO.getUser().getIdusuario()%>" class="btn btn-default" ><i class="fas fa-edit"></i></a>
                                         <form action="UserDisable" method="post">
-                                            <input type="hidden" name="id" value="<%=userVO.getIdusuario()%>">
-                                           <button type="submit" class="btn btn-default ml-1" onclick="return confirm('Esta seguro de eliminar este registro?');" ><i class="fas fa-trash"></i></button>
+                                            <input type="hidden" name="id" value="<%=userDTO.getUser().getIdusuario()%>">
+                                            <button type="submit" class="btn btn-default ml-1" onclick="return confirm('Esta seguro de eliminar este registro?');" ><i class="fas fa-trash"></i></button>
                                         </form>
                                     </div>
                                 </td>
@@ -86,6 +83,7 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
+                                        <th>Tipo</th>
                                         <th>Numero Doc</th>
                                         <th>Rol</th>
                                         <th>Nombre completo</th>
@@ -96,34 +94,13 @@
                                     </tr>
                                 </tfoot>
                             </table>
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
-                </div>
-                <!-- /.col -->
-            </div>
-            <!-- /.row -->
-        </div>
-        <!-- /.container-fluid -->
+                        </div>                        
+                    </div>                    
+                </div>                
+            </div>            
+        </div>        
     </section>
-    <!-- /.content -->
-</div>
-</div>
-<!-- /.card -->
-</div>
-<!--/.col (left) -->
-<!-- right column -->
-<div class="col-md-6">
-
-</div>
-<!--/.col (right) -->
-</div>
-<!-- /.row -->
-</div><!-- /.container-fluid -->
-</section>
-<!-- /.content -->
-</div>
+</div>  
 
 <%@include file="../../template/footer.jsp" %>
 

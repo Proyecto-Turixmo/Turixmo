@@ -6,3 +6,8 @@
 
 - Boton de politicas y privacidad
 - MejorarSeccion de registro de Propietario
+- Un objeto puede tener como propiedad otros objetos(EJ: usuario->Tipodpcumento)
+- Conciderar el uso de un DTO para manejar facilmente los datos (VOs)
+- Como detener el flujo de ejecusion del codigo
+- Almacenar usuario en session con con el DTO
+- * Para campos obligatorios

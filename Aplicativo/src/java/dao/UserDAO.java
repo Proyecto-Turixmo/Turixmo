@@ -36,6 +36,7 @@ public class UserDAO extends Connect implements IUser {
     public boolean create(UserVO user) {
 
         try {
+            this.createConnection();
             this.conection = this.getConnection();
             this.sql = "call sp_insertarusuario(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             this.stmt = conection.prepareStatement(sql);
@@ -77,6 +78,7 @@ public class UserDAO extends Connect implements IUser {
         ArrayList<UserVO> users = new ArrayList<>();
 
         try {
+            this.createConnection();
             conection = this.getConnection();
             stmt = conection.prepareStatement("SELECT * FROM v_usuario");
             result = stmt.executeQuery();
@@ -121,6 +123,7 @@ public class UserDAO extends Connect implements IUser {
         UserVO userVO = new UserVO();
 
         try {
+            this.createConnection();
             conection = this.getConnection();
             stmt = conection.prepareStatement("SELECT * FROM v_usuario WHERE idusuario = ?");
             stmt.setInt(1, idUser);
@@ -163,6 +166,7 @@ public class UserDAO extends Connect implements IUser {
     public boolean updateById(UserVO user) {
 
         try {
+            this.createConnection();
             conection = this.getConnection();
             this.sql = "call sp_actualizarusuario(?,?,?,?,?,?,?,?,?,?)";
             this.stmt = conection.prepareStatement(this.sql);
@@ -196,8 +200,9 @@ public class UserDAO extends Connect implements IUser {
     public boolean deleteById(int idUser) {
 
         try {
-            conection = this.getConnection();
-            sql = "call sp_inhabilitarusuario(?) ";
+            this.createConnection();
+            this.conection = this.getConnection();
+            this.sql = "call sp_inhabilitarusuario(?) ";
             stmt = conection.prepareStatement(sql);
             stmt.setInt(1, idUser);
             stmt.executeUpdate();
@@ -219,6 +224,7 @@ public class UserDAO extends Connect implements IUser {
 
         UserVO userVO = new UserVO();
         try {
+            this.createConnection();
             conection = this.getConnection();
             sql = "SELECT * FROM v_usuario WHERE correo = ? ";
             stmt = conection.prepareStatement(sql);

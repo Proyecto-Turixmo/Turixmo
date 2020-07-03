@@ -1,6 +1,7 @@
- <h3 class="ml-2 ml-md-5 mt-4">Resultado de tu busqueda</h3>
+<div class="px-md-5 container-fluid ">
+<h3 class="ml-2 ml-md-5 mt-4">Resultado de tu busqueda</h3>
  <hr>
-<div class="px-md-5">
+
 
 <div class="row row-cols-1 row-cols-md-4" >
   <div class="col mb-0">

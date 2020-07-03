@@ -1,0 +1,20 @@
+
+@media (min-width   : 720px){
+    .more-size{
+        font-size: 19px;
+    }
+}
+    .more-size{
+        font-size: 19px;
+    }
+    
+    .badge-turixmo{
+        font-size: 11px;
+    }
+.aparecer{
+    display:block;     }
+.desaparecer{
+    display:none;
+
+}
+

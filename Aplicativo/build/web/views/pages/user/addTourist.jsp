@@ -1,6 +1,6 @@
 
 <%@include file="../../template/header.jsp" %>
-<%@include file="../..//template/navbarDefault.jsp" %>
+<%@include file="../../template/navbarMain.jsp" %>
 
  <div class="container mt-3">
     <div class="row">

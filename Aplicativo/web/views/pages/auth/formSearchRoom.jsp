@@ -1,13 +1,13 @@
 
-<div class="  py-2 text-center border-top" style="">
-    <h4>Reserva tu sitio Ya!</h4>
+<div class="  py-4 text-center bg-white" style="">
+    <h3>Reserva tu sitio Ya!</h3>
 </div>
 
-<div class="container-fluid bg-info mt-0">
+<div class="container-fluid bg-gradient-blue py-4 mt-0">
     <div class="row">
         <div class="col-md-1"></div> 
         <div class="col-md-10">
-            <div class="bg-info p-2 py-4 ">
+            <div class="bg- p-2 py-4 ">
                 <form class="">
                     <div class="form-row">
                         <div class="form-group col-md-5">

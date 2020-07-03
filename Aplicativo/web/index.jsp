@@ -1,5 +1,4 @@
 <%@page import="util.Session"%>
-<% Session.validateHome(request, response); %>
 <%@include file="views/template/header.jsp" %>
 <%@include file="views/template/navbarMain.jsp" %>
 <%@include file="views/pages/auth/formSearchRoom.jsp" %>

@@ -1,21 +1,15 @@
  package controllers;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Enumeration;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import models.UserModel;
-import vo.UserSessionVO;
-import vo.UserVO;
+import repositories.UserRepository;
 import util.Session;
-import util.Util;
 
 @WebServlet(name = "UserController",
         urlPatterns = {"/UserAdd", "/UserGetall", "/UserEdit", "/closeSession",
@@ -23,26 +17,43 @@ import util.Util;
 
 public class UserController extends HttpServlet {
 
-    public String message = null, type = null;
+      private UserRepository  user = null;
+    
+    public UserController() {
+         this.user = new UserRepository();
+    }
+
+    @Override
+    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+    Session.validateHome(request, response);
+ 
+        switch(request.getMethod()){
+            case "GET":
+                this.doGet(request, response);
+            break;
+            case "POST":
+                this.doPost(request, response);
+            break;
+        }
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        Session.validateHome(request, response);
-
         switch (request.getServletPath()) {
             case "/UserAdd":
-                request.getRequestDispatcher("views/pages/user/update.jsp").forward(request, response);
+                this.user.add(request, response);
                 break;
             case "/UserGetall":
-                request.getRequestDispatcher("views/pages/user/list.jsp").forward(request, response);
+                this.user.all(request, response);
                 break;
             case "/UserEdit":
-                this.edit(request, response);
+                this.user.get(request, response);
                 break;
             case "/closeSession":
-                this.closeSession(request, response);
+                this.user.closeSession(request, response);
                 break;
             default:
                 request.getRequestDispatcher("views/error404.jsp").forward(request, response);
@@ -52,18 +63,16 @@ public class UserController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        Session.validateHome(request, response);
         
         switch (request.getServletPath()) {
             case "/UserCreate":
-                this.create(request, response);
+                this.user.create(request, response);
                 break;
             case "/UserUpdate":
-                this.update(request, response);
+                this.user.update(request, response);
                 break;
             case "/UserDisable":
-                this.disable(request, response);
+                this.user.disable(request, response);
                 break;
             default:
                 request.getRequestDispatcher("views/error404.jsp").forward(request, response);
@@ -71,119 +80,5 @@ public class UserController extends HttpServlet {
 
     }
 
-    private void create(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        Date fecha = new Date();
-        DateFormat formateador = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-        UserModel user = new UserModel();
-        UserVO userVO = new UserVO();
-
-        userVO.setIdtipodocumento(request.getParameter("tipoDocumento"));
-        userVO.setNumerodocumento(request.getParameter("numeroDocumento"));
-        userVO.setIdpais("1");
-        userVO.setIdrol(request.getParameter("rol"));
-        userVO.setNombre(request.getParameter("nombre"));
-        userVO.setApellido(request.getParameter("apellido"));
-        userVO.setCorreo(request.getParameter("correo"));
-        userVO.setContrasena(request.getParameter("contrasena"));
-        userVO.setCelular(request.getParameter("celular"));
-        userVO.setFechanacimiento(Util.nullToSpace(request.getParameter("fechaNacimiento")));
-        userVO.setFecharegistro(formateador.format(fecha));
-        userVO.setInhabilitado("0");
-
-        if (user.create(userVO)) {
-
-            this.type = "success";
-            this.message = "El usuario se ha registrado correctamente";
-        } else {
-            this.type = "danger";
-            this.message = "Lo sentimos el usuario no se puedo registrar";
-        }
-        request.setAttribute("message", this.message);
-        request.setAttribute("type", this.type);
-        request.getRequestDispatcher("views/pages/user/update.jsp").forward(request, response);
-
-    }
-
-    private void edit(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        int iduser = Integer.parseInt(request.getParameter("id"));
-        UserModel user = new UserModel();
-        request.setAttribute("user", user.getById(iduser));
-        request.getRequestDispatcher("views/pages/user/update.jsp").forward(request, response);
-
-    }
-
-    private void update(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        Date fecha = new Date();
-        DateFormat formateador = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-
-        UserModel user = new UserModel();
-        UserVO userVO = new UserVO();
-        
-        userVO.setIdusuario(request.getParameter("id"));
-        userVO.setIdtipodocumento(request.getParameter("tipoDocumento"));
-        userVO.setIdpais("1");
-        userVO.setIdrol(request.getParameter("rol"));
-        userVO.setNombre(request.getParameter("nombre"));
-        userVO.setApellido(request.getParameter("apellido"));
-        userVO.setCorreo(request.getParameter("correo"));
-        userVO.setCelular(request.getParameter("celular"));
-        userVO.setGenero(request.getParameter("genero"));
-        userVO.setFechanacimiento(Util.nullToSpace(request.getParameter("fechaNacimiento")));
-        userVO.setFecharegistro(formateador.format(fecha));
-        userVO.setInhabilitado("0");
-
-        if (user.updateById(userVO)) {
-            if(Session.get(request).getIdusuario().equals(userVO.getIdusuario())){
-                Session.set(request, userVO);
-            }
-            type = "success";
-            message = "El usuario se ha Actualizado correctamente";
-        } else {
-            type = "danger";
-            message = "Lo sentimos el usuario no se pudo actualizar";
-        }
-        request.setAttribute("message", message);
-        request.setAttribute("type", type);
-        request.getRequestDispatcher("views/pages/user/list.jsp").forward(request, response);
-
-    }
-
-    private void disable(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        int iduser = Integer.parseInt(request.getParameter("id"));
-        UserModel user = new UserModel();
-
-        if (user.deleteById(iduser)) {
-            type = "info";
-            message = "El usuario se ha eliminado correctamente";
-        } else {
-            type = "danger";
-            message = "Lo sentimos el usuario no se puedo eliminar";
-        }
-        request.setAttribute("message", message);
-        request.setAttribute("type", type);
-        request.getRequestDispatcher("views/pages/user/list.jsp").forward(request, response);
-    }
-
-    
-    
-        private void closeSession(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-         if(Session.drop(request)){
-                request.getRequestDispatcher("views/pages/auth/login.jsp").forward(request, response);
-         }else{
-               request.getRequestDispatcher("views/pages/user/list.jsp").forward(request, response);
-         }
-    }
 
 }
