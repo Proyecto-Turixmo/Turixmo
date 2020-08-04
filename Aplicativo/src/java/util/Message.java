@@ -16,7 +16,7 @@ public class Message {
 
     public static void set(HttpServletRequest request, String name, String value) throws ServletException, IOException {
         try {
-            HttpSession session = (HttpSession) request.getSession(true);
+            HttpSession session = request.getSession(true);
             session.setAttribute(name, value);
 
         } catch (Exception e) {
@@ -27,7 +27,7 @@ public class Message {
     public static String get(HttpServletRequest request, String name) throws ServletException, IOException {
         String message = null;
         try {
-            HttpSession session = (HttpSession) request.getSession();
+            HttpSession session = request.getSession();
             if (session.getAttribute(name) != null) {
                 message = (String) session.getAttribute(name);
 
@@ -42,7 +42,7 @@ public class Message {
 
     public static void destroy(HttpServletRequest request, String[] names) throws ServletException, IOException {
         try {
-            HttpSession session = (HttpSession) request.getSession();
+            HttpSession session = request.getSession();
             for (String name : names) {
                 if (session.getAttribute(name) != null) {
                     session.removeAttribute(name);

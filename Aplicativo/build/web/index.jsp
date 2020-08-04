@@ -1,10 +1,9 @@
 <%@page import="util.Session"%>
-<%@include file="views/template/header.jsp" %>
-<%@include file="views/template/navbarMain.jsp" %>
-<%@include file="views/pages/auth/formSearchRoom.jsp" %>
-
-<%@include file="views/pages/booking/roomsSearch.jsp" %>
-<%@include file="views/pages/booking/roomsFamous.jsp" %>
-
-
-<%@include file="views/template/footerDefault.jsp" %>
+<%@include file="views/template/homepage/header.jsp" %>
+<%@include file="views/template/homepage/navbar.jsp" %>
+<%@include file="views/template/homepage/banner_form.jsp" %>
+<%@include file="views/template/homepage/offers.jsp" %>
+<%@include file="views/template/homepage/sites.jsp" %>
+<%@include file="views/template/homepage/about_we.jsp" %>
+<%@include file="views/template/homepage/resena.jsp" %>
+<%@include file="views/template/homepage/footer.jsp" %>

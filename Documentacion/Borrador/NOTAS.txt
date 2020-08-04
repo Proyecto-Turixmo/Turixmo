@@ -11,3 +11,4 @@
 - Como detener el flujo de ejecusion del codigo
 - Almacenar usuario en session con con el DTO
 - * Para campos obligatorios
+- Implementar el sistema de recordame la contraseña

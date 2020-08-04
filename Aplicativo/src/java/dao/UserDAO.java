@@ -38,8 +38,8 @@ public class UserDAO extends Connect implements IUser {
         try {
             this.createConnection();
             this.conection = this.getConnection();
-            this.sql = "call sp_insertarusuario(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-            this.stmt = conection.prepareStatement(sql);
+            this.sql = "{ call sp_insertarusuario(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }";
+            this.stmt = conection.prepareCall(sql);
             this.stmt.setString(1, Util.spaceToNull(user.getIdusuario()));
             this.stmt.setString(2, user.getIdtipodocumento());
             this.stmt.setString(3, user.getNumerodocumento());

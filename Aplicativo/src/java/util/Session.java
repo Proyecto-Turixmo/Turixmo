@@ -12,7 +12,7 @@ import vo.UserVO;
 
 public class Session {
 
-    private static String redirectToSuccessOnwer = "UserGetall";
+    private static String redirectToSuccessOnwer = "user-all";
     private static String redirectToSuccessTourist = "index.jsp";
     private static String redirectToError = "login";
     private static String name = "user";
@@ -51,7 +51,7 @@ public class Session {
 
         boolean estado = false;
         try {
-            HttpSession session = (HttpSession) request.getSession(true);
+            HttpSession session = request.getSession(true);
 
             UserSessionVO usersession = new UserSessionVO();
 
@@ -75,7 +75,7 @@ public class Session {
     private static boolean check(HttpServletRequest request) throws ServletException, IOException {
         boolean estado = false;
         try {
-            HttpSession session = (HttpSession) request.getSession();
+            HttpSession session = request.getSession();
             if (session.getAttribute(name) != null) {
                 UserSessionVO miuser = (UserSessionVO) session.getAttribute(name);
                 if (!miuser.getIdusuario().equals("")) {
@@ -94,7 +94,7 @@ public class Session {
         public static UserSessionVO get(HttpServletRequest request) throws ServletException, IOException {
         UserSessionVO usersession = null;
         try {
-            HttpSession session = (HttpSession) request.getSession();
+            HttpSession session = request.getSession();
             if (session.getAttribute(name) != null) {
                 UserSessionVO miuser = (UserSessionVO) session.getAttribute(name);
                 if (!miuser.getIdusuario().equals("")) {
@@ -115,7 +115,7 @@ public class Session {
         boolean estado = false;
         try {
             
-            HttpSession session = (HttpSession) request.getSession(true); //inicia el objeto de session
+            HttpSession session = request.getSession(true); //inicia el objeto de session
             UserSessionVO miuser = (UserSessionVO) session.getAttribute(name); // trae los datos del objeto eb especifico
             UserSessionVO usersession = new UserSessionVO(); //creo el objeto que reinsertare
 
@@ -139,7 +139,7 @@ public class Session {
     public static boolean drop(HttpServletRequest request) throws ServletException, IOException {
         boolean estado = false;
         try {
-            HttpSession session = (HttpSession) request.getSession();
+            HttpSession session = request.getSession();
             session.invalidate();
             estado = true;
         } catch (Exception e) {

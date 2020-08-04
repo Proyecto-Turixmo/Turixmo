@@ -1,20 +1,21 @@
 package controllers;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import models.UserModel;
 import repositories.AuthRepository;
 import util.Session;
 
 @WebServlet(name = "AuthController",
-        urlPatterns = {"/login", "/logina", "/forgotPassword", "/forgotPassword",
-            "/addOwner", "/addTourist", "/validate", "/createUser"})
+        urlPatterns = {"/login","/index2", "/forgotPassword",
+            "/addOnwer", "/addTourist", "/validate", "/authUserCreate"})
 
 public class AuthController extends HttpServlet {
+
 
     private AuthRepository auth = null;
     public AuthController() {
@@ -22,12 +23,15 @@ public class AuthController extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet( HttpServletRequest request,  HttpServletResponse response)
             throws ServletException, IOException {
 
         Session.validateOutside(request, response);
 
         switch (request.getServletPath()) {
+               case "/index2":
+                request.getRequestDispatcher("views/old.jsp").forward(request, response);
+                break;
             case "/login":
                 request.getRequestDispatcher("views/pages/auth/login.jsp").forward(request, response);
                 break;
@@ -50,7 +54,7 @@ public class AuthController extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request,HttpServletResponse response)
             throws ServletException, IOException {
 
         Session.validateOutside(request, response);
@@ -58,7 +62,7 @@ public class AuthController extends HttpServlet {
             case "/validate":
                 this.auth.doValidate(request, response);
                 break;
-            case "/createUser":
+            case "/authUserCreate":
                 this.auth.create(request, response);
                 break;
             default:

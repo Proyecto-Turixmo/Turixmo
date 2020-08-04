@@ -1,4 +1,3 @@
-
 package controllers;
 
 import java.io.IOException;
@@ -13,8 +12,8 @@ import util.Session;
 
 
 @WebServlet(name = "/HotelController",
-        urlPatterns = {"/HotelAdd", "/HotelGetall", "/HotelEdit",
-                       "/HotelCreate", "/HotelUpdate", "/HotelDisable"})
+        urlPatterns = {"/hotelAdd", "/hotelAll", "/hotelEdit",
+                       "/hotelCreate", "/hotelUpdate", "/hotelDisable"})
 public class HotelController extends HttpServlet {
 
     private HotelRepository  hotel = null;
@@ -30,13 +29,13 @@ public class HotelController extends HttpServlet {
         Session.validateHome(request, response);
 
         switch (request.getServletPath()) {
-            case "/HotelAdd":
+            case "/hotelAdd":
                 request.getRequestDispatcher("views/pages/hotel/add.jsp").forward(request, response);
                 break;
-            case "/HotelGetall":
+            case "/hotelAll":
                   request.getRequestDispatcher("views/pages/hotel/list.jsp").forward(request, response);
                 break;
-            case "/HotelEdit":
+            case "/hotelEdit":
                 this.hotel.edit(request, response);
                 break;
             default:
@@ -51,13 +50,13 @@ public class HotelController extends HttpServlet {
         Session.validateHome(request, response);
         
         switch (request.getServletPath()) {
-            case "/HotelCreate":
+            case "/hotelCreate":
                 this.hotel.create(request, response);
                 break;
-            case "/HotelUpdate":
+            case "/hotelUpdate":
                 this.hotel.update(request, response);
                 break;
-            case "/HotelDisable":
+            case "/hotelDisable":
                 this.hotel.disable(request, response);
                 break;
             default:

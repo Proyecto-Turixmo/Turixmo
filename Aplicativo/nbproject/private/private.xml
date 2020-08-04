@@ -3,14 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/andre/Documents/NetBeans_Projects/Proyecto_Turixmos/Aplicativo/src/java/dto/UserDTO.java</file>
-            <file>file:/C:/Users/andre/Documents/NetBeans_Projects/Proyecto_Turixmos/Aplicativo/src/java/models/UserModel.java</file>
-            <file>file:/C:/Users/andre/Documents/NetBeans_Projects/Proyecto_Turixmos/Aplicativo/src/java/dao/DocumentTypeDAO.java</file>
-            <file>file:/C:/Users/andre/Documents/NetBeans_Projects/Proyecto_Turixmos/Aplicativo/src/java/controllers/AuthController.java</file>
-            <file>file:/C:/Users/andre/Documents/NetBeans_Projects/Proyecto_Turixmos/Aplicativo/src/java/dao/RoleDAO.java</file>
-            <file>file:/C:/Users/andre/Documents/NetBeans_Projects/Proyecto_Turixmos/Aplicativo/src/java/dao/UserDAO.java</file>
-            <file>file:/C:/Users/andre/Documents/NetBeans_Projects/Proyecto_Turixmos/Aplicativo/src/java/models/HotelModel.java</file>
-            <file>file:/C:/Users/andre/Documents/NetBeans_Projects/Proyecto_Turixmos/Aplicativo/src/java/controllers/UserController.java</file>
+            <file>file:/C:/Users/andre/Documents/NetBeans_Projects/Proyecto_Turixmos/Aplicativo/src/java/dao/HotelDAO.java</file>
         </group>
     </open-files>
 </project-private>

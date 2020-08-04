@@ -35,7 +35,7 @@ public class AuthRepository {
                 UserVO userResult = user.validate(userVO.getCorreo(),userVO.getContrasena());
                   if(userResult != null){
                       Session.add(request,userResult);
-                      ruta = "UserGetall";
+                      ruta = "user-all";
                   }else{
                      Message.set(request,"type" , "danger");
                      Message.set(request,"message" , "Usuario y/o contraseña Incorrectos.");

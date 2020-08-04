@@ -100,9 +100,9 @@
     <a class="dropdown-item py-0" href="#"><strong class="text-primary">Opciones</strong></a>
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="login">Iniciar Sesion</a>
-    <a class="dropdown-item" href="addTourist">Registrar Turista</a>
-    <a class="dropdown-item" href="addOwner">Registrar Propietario</a>
-    <a class="dropdown-item" href="UserGetall">Session de Admins</a>
+    <a class="dropdown-item" href="add-tourist">Registrar Turista</a>
+    <a class="dropdown-item" href="add-owner">Registrar Propietario</a>
+    <a class="dropdown-item" href="user-all">Session de Admins</a>
   </div>
 </div>
       </li>

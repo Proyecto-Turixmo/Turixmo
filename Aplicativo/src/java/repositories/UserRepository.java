@@ -50,7 +50,7 @@ public class UserRepository {
               Message.set(request,"message" , "Lo sentimos el usuario no se pudo registrar");       
         }
         
-        response.sendRedirect(Config.getURL_PROJECT()+"UserAdd");
+        response.sendRedirect(Config.getURL_PROJECT()+"user-add");
 
     }
 
@@ -109,7 +109,7 @@ public class UserRepository {
 
         }
 
-            response.sendRedirect(Config.getURL_PROJECT()+"UserGetall");
+            response.sendRedirect(Config.getURL_PROJECT()+"user-all");
 
     }
 
@@ -127,7 +127,7 @@ public class UserRepository {
              Message.set(request,"message" , "Lo sentimos el usuario no se puedo eliminar");
         }
         
-        response.sendRedirect(Config.getURL_PROJECT()+"UserGetall");
+        response.sendRedirect(Config.getURL_PROJECT()+"user-all");
     }
 
     public void closeSession(HttpServletRequest request, HttpServletResponse response)

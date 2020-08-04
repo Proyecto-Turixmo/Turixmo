@@ -41,7 +41,7 @@
                                 <a href="forgotPassword" class=" my-n1 ">¿Olvidaste tu contraseña?</a>
                             </div>
                             <div class="form-group  text-sm">
-                                <span class="col-md-6 align-content-start">¿aún no tienes una cuenta? <a href="addTourist" class="">Registrarme!</a></span>
+                                <span class="col-md-6 align-content-start">¿aún no tienes una cuenta? <a href="add-tourist" class="">Registrarme!</a></span>
                             </div>                            <div class="form-group  text-sm">
                        
                             </div>

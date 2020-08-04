@@ -2,8 +2,7 @@
 
 import java.io.IOException;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,8 +11,8 @@ import repositories.UserRepository;
 import util.Session;
 
 @WebServlet(name = "UserController",
-        urlPatterns = {"/UserAdd", "/UserGetall", "/UserEdit", "/closeSession",
-            "/UserCreate", "/UserUpdate", "/UserDisable"})
+        urlPatterns = {"/userAdd", "/userAll", "/userEdit", "/closeSession",
+                       "/userCreate", "/userUpdate", "/userDisabled"})
 
 public class UserController extends HttpServlet {
 
@@ -26,7 +25,7 @@ public class UserController extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
-    Session.validateHome(request, response);
+     Session.validateHome(request, response);
  
         switch(request.getMethod()){
             case "GET":
@@ -43,13 +42,13 @@ public class UserController extends HttpServlet {
             throws ServletException, IOException {
 
         switch (request.getServletPath()) {
-            case "/UserAdd":
+            case "/userAdd":
                 this.user.add(request, response);
                 break;
-            case "/UserGetall":
+            case "/userAll":
                 this.user.all(request, response);
                 break;
-            case "/UserEdit":
+            case "/userEdit":
                 this.user.get(request, response);
                 break;
             case "/closeSession":
@@ -65,13 +64,13 @@ public class UserController extends HttpServlet {
             throws ServletException, IOException {
         
         switch (request.getServletPath()) {
-            case "/UserCreate":
+            case "/userCreate":
                 this.user.create(request, response);
                 break;
-            case "/UserUpdate":
+            case "/userUpdate":
                 this.user.update(request, response);
                 break;
-            case "/UserDisable":
+            case "/userDisable":
                 this.user.disable(request, response);
                 break;
             default:
