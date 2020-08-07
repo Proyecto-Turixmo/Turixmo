@@ -4,38 +4,38 @@
             	<span class="icon deco"></span>
             	<div class="row">
                 	<div class="col-sm-2 text-center">
-                    	<img class="logo" src="img/logo-white.png" alt="logo" />
+                    	
                     </div>
                     <div class="col-sm-2">
                     	<ul>
-                        	<li><strong>Our Menu</strong></li>
-                            <li><a href="#">Press Center</a></li>
-                            <li><a href="#">Travel News</a></li>
-                            <li><a href="#">Best Price Guarantee</a></li>
+                        	<li><strong>Nuestro menu</strong></li>
+                            <li><a href="#">Pagina principal</a></li>
+                            <li><a href="#">Hoteles</a></li>
+                            <li><a href="#">Lugares</a></li>
                         </ul>
                     </div>
                     <div class="col-sm-2">
                     	<ul>
-                        	<li><strong>Usefull Link</strong></li>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Travel News</a></li>
-                            <li><a href="#">Support Center</a></li>
+                        	<li><strong>Lugares</strong></li>
+                            <li><a href="#">Cuentanos</a></li>
+                            <li><a href="#">Noticias</a></li>
+                            <li><a href="#">Centro de atencion</a></li>
                         </ul>
                     </div>
                     <div class="col-sm-2">
                     	<ul>
-                        	<li><strong>Account</strong></li>
-                            <li><a href="#">My Account</a></li>
-                            <li><a href="#">Personal Information</a></li>
-                            <li><a href="#">My Credit Slip</a></li>
+                        	<li><strong>Cuenta</strong></li>
+                            <li><a href="#">Mi cuenta</a></li>
+                            <li><a href="#">Informacion principal</a></li>
+                            <li><a href="#">Editar</a></li>
                         </ul>
                     </div>
                     <div class="col-md-4 subscribe">
-                    	<strong>Subscribe</strong>
-                        <input type="email" placeholder="Your Email Address" />
-                        <input type="submit" class="btn btn-info" value="Send" />
+                    	<strong>Suscribete</strong>
+                        <input type="email" placeholder="Tu correo" />
+                        <input type="submit" class="btn btn-info" value="Enviar" />
                         <div class="socmed">
-                        	Find Us : 
+                        	Encuentranos : 
                             <a href="#"><i class="icon fb"></i></a>
                             <a href="#"><i class="icon tw"></i></a>
                             <a href="#"><i class="icon yt"></i></a>

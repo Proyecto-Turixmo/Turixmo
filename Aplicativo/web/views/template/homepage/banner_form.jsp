@@ -1,13 +1,6 @@
         <section class="banner">
             <div class="slider">
-                <div class="slide">
-                    <img src="libs/homepage/img/slider/img1.jpg" alt="" />
-                    <div class="caption">
-                        <h2><span>indonesia</span> bali paradise</h2>
-                        <span>Mulai</span>
-                        <h3>Rp. 700<em>K</em></h3>
-                    </div>
-                </div>
+               
                 <div class='csslider1 autoplay'>
                     <input name="cs_anchor1" id='cs_slide1_0' type="radio" class='cs_anchor slide'>
                     <input name="cs_anchor1" id='cs_slide1_1' type="radio" class='cs_anchor slide'>
@@ -27,36 +20,37 @@
                    	  <div class="cs_title">
                        	  <div class="cs_wrapper">
                        	    <div class="caption">
-                                   <h2><span>indonesia</span> bali paradise</h2>
-                                   <span>Mulai</span>
-                                   <h3>Rp. 700<em>K</em></h3>
+                                   <h2><span>Bogota</span> La candelaria</h2>
+                                   <span>Hoteles en Bogota</span>
+                                   <h3>$25,000<em>Pesos Colombianos</em></h3>
                             </div>
                        	  </div>
                       </div>
                    </label>
-                        <label class='num1'>
+                 
+                  <label class='num1'>
                    	  <div class="cs_title">
                        	  <div class="cs_wrapper">
                               <div class="caption">
-                                  <h2><span>indonesia</span> bali paradise</h2>
-                                  <span>Mulai</span>
-                                  <h3>Rp. 700<em>K</em></h3>
+                                  <h2><span>Antioquia</span> Eje Cafetero</h2>
+                                  <span>Hoteles en Antioquia</span>
+                                  <h3>$25,000<em>Pesos Colombianos</em></h3>
                               </div>
                        	  </div>
                       </div>
                   </label>
-                        <label class='num2'>
+                  <label class='num2'>
                    	  <div class="cs_title">
                        	  <div class="cs_wrapper">
                               <div class="caption">
-                                  <h2><span>indonesia</span> bali paradise</h2>
-                                  <span>Mulai</span>
-                                  <h3>Rp. 700<em>K</em></h3>
+                                  <h2><span>Meta</span> Caño Cristales</h2>
+                                  <span>Hoteles en el Meta</span>
+                                  <h3>$25,000<em>Pesos Colombianos</em></h3>
                               </div>
                        	  </div>
                       </div>
                   </label>
-                    </div>
+              </div>
                     <div class='cs_play_pause'>
                         <label class='cs_play' for='cs_play1'><span><i></i><b></b></span></label>
                         <label class='cs_pause num0' for='cs_pause1_0'><span><i></i><b></b></span></label>
@@ -78,38 +72,38 @@
 
             <div class="search">
                 <div class="container">
-                    <em class="intro icon">Rencanakan dan Dapatkan <strong>Perjalanan Impian Anda</strong></em>
+                   
                     <div class="form-group row no-margin">
                         <div class="input col-sm-2">
-                            <label>From :</label>
+                            <label>De :</label>
                             <input type="text" class="icon-a icon-a-plane-up autocomplete ui-autocomplete-input" placeholder="Country or City" autocomplete="off">
                         </div>
                         <div class="input col-sm-2">
-                            <label>To :</label>
+                            <label>A :</label>
                             <input type="text" class="icon-a icon-a-plane-down autocomplete ui-autocomplete-input" placeholder="Country or City" autocomplete="off">
                         </div>
                         <div class="input col-sm-2">
-                            <label>Depart :</label>
+                            <label>Fecha :</label>
                             <input type="text" class="icon-a icon-a-calendar datepicker" placeholder="dd/mm/yyyy">
                         </div>
                         <div class="input col-sm-2">
-                            <label class="check checked"><input type="checkbox"> Return :</label>
+                            <label class="check checked"><input type="checkbox"> Regreso :</label>
                             <input type="text" class="icon-a icon-a-calendar datepicker" placeholder="dd/mm/yyyy">
                         </div>
                         <div class="input col-sm-2 passenger">
                             <label>For :</label>
                             <div class="col-xs-4">
-                                <input type="number" value="0"> Adult
+                                <input type="number" value="0"> Adulto
                             </div>
                             <div class="col-xs-4">
-                                <input type="number" value="0"> Children
+                                <input type="number" value="0"> Niño
                             </div>
                             <div class="col-xs-4">
-                                <input type="number" value="0"> Infant
+                                <input type="number" value="0"> Bebés
                             </div>
                         </div>
                         <div class="col-sm-2 submit text-center">
-                            <button class="btn btn-info full-width">Search Ticket</button>
+                            <button class="btn btn-info full-width">¡¡Reserva ahora!!</button>
                         </div>
                     </div>
                 </div>

@@ -1,8 +1,9 @@
         <section class="showcase text-center">
             <div class="container">
-                <h3 class="title"><strong class="text-blue"> Favorite </strong> Destination</h3>
+                <h3 class="title"><strong class="text-blue"> Hoteles </strong> Recomendados</h3>
                 <p>
-                    Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit <br /> litterarum formas humanitatis per
+                   Los hoteles con mejor calificacion para ti.
+                    Recomendado por usuarios y nuestro personal.
                 </p>
 
                 <div class="row show-gallery">
@@ -12,7 +13,7 @@
                                 <img src="libs/homepage/img/route1.png" alt="" />
                                 <section class="detail">
                                     <div class="info">
-                                        <h5>Borobudur Temple <span>Jawa Tengah, Indonesia</span></h5>
+                                        <h5>Hotel los Rios <span>La candelaria, Bogota</span></h5>
                                         <div class="star-block">
                                             <span class="icon star"></span>
                                             <span class="icon star"></span>
@@ -22,8 +23,8 @@
                                         </div>
 
                                         <span class="price">
-                                            from <span class="coret">Rp.400k</span><br />
-                                        <strong>Rp.328k</strong>pp
+                                            Antes <span class="coret">$40.000</span><br />
+                                            <strong>$25.000</strong>Pesos
                                         </span>
                                     </div>
                                 </section>
@@ -34,7 +35,7 @@
                                 <img src="libs/homepage/img/route2.png" alt="" />
                                 <section class="detail">
                                     <div class="info">
-                                        <h5>Borobudur Temple <span>Jawa Tengah, Indonesia</span></h5>
+                                        	<h5>Hotel Mercerdes <span>Ibague , Tolima</span></h5>
                                         <div class="star-block">
                                             <span class="icon star"></span>
                                             <span class="icon star"></span>
@@ -43,8 +44,8 @@
                                             <span class="icon star-empty"></span>
                                         </div>
                                         <span class="price">
-                                            from <span class="coret">Rp.400k</span><br />
-                                        <strong>Rp.328k</strong>pp
+                                             Antes <span class="coret">$40.000</span><br />
+                                            <strong>$25.000</strong>Pesos
                                         </span>
                                     </div>
                                 </section>
@@ -56,7 +57,7 @@
                                 <img src="libs/homepage/img/route3.png" alt="" />
                                 <section class="detail">
                                     <div class="info">
-                                        <h5>Borobudur Temple <span>Jawa Tengah, Indonesia</span></h5>
+                                       <h5>Hotel Mar Azul <span>Bogota</span></h5>
                                         <div class="star-block">
                                             <span class="icon star"></span>
                                             <span class="icon star"></span>
@@ -65,12 +66,12 @@
                                             <span class="icon star-empty"></span>
                                         </div>
                                         <span class="price">
-                                            from <span class="coret">Rp.400k</span><br />
-                                        <strong>Rp.328k</strong>pp
+                                            Antes <span class="coret">$40.000</span><br />
+                                            <strong>$25.000</strong>Pesos
                                         </span>
                                     </div>
-                                    <a href="#" class="btn btn-def">Check Now</a>
-                                    <a href="#" class="btn btn-info">Get it Now</a>
+                                    <a href="#" class="btn btn-def">Mirar</a>
+                                    <a href="#" class="btn btn-info">Reseñas</a>
                                 </section>
                             </div>
                         </div>
@@ -80,7 +81,7 @@
                             <img src="libs/homepage/img/route4.png" alt="" />
                             <section class="detail">
                                 <div class="info">
-                                    <h5>Borobudur Temple <span>Jawa Tengah, Indonesia</span></h5>
+                                    <h5>Hotel Cruz Azul<span>Cartagena</span></h5>
                                     <div class="star-block">
                                         <span class="icon star"></span>
                                         <span class="icon star"></span>
@@ -89,19 +90,19 @@
                                         <span class="icon star-empty"></span>
                                     </div>
                                     <span class="price">
-                                        from <span class="coret">Rp.400k</span><br />
-                                    <strong>Rp.328k</strong>pp
+                                       Antes <span class="coret">$40.000</span><br />
+                                            <strong>$25.000</strong>Pesos
                                     </span>
                                 </div>
-                                <a href="#" class="btn btn-def">Check Now</a>
-                                <a href="#" class="btn btn-info">Get it Now</a>
+                                <a href="#" class="btn btn-def">Mirar</a>
+                                    <a href="#" class="btn btn-info">Reseñas</a>
                             </section>
                         </div>
                         <div class="item small long">
                             <img src="libs/homepage/img/route5.png" alt="" />
                             <section class="detail">
                                 <div class="info">
-                                    <h5>Borobudur Temple <span>Jawa Tengah, Indonesia</span></h5>
+                                    <h5>Hotel London <span>Bogota</span></h5>
                                     <div class="star-block">
                                         <span class="icon star"></span>
                                         <span class="icon star"></span>
@@ -110,8 +111,8 @@
                                         <span class="icon star-empty"></span>
                                     </div>
                                     <span class="price">
-                                        from <span class="coret">Rp.400k</span><br />
-                                    <strong>Rp.328k</strong>pp
+                                         Antes <span class="coret">$40.000</span><br />
+                                            <strong>$25.000</strong>Pesos
                                     </span>
                                 </div>
                             </section>
@@ -123,7 +124,7 @@
                                 <img src="libs/homepage/img/route6.png" alt="" />
                                 <section class="detail">
                                     <div class="info">
-                                        <h5>Borobudur Temple <span>Jawa Tengah, Indonesia</span></h5>
+                                       <h5>Hotel las cañas <span>Cali</span></h5>
                                         <div class="star-block">
                                             <span class="icon star"></span>
                                             <span class="icon star"></span>
@@ -132,12 +133,12 @@
                                             <span class="icon star-empty"></span>
                                         </div>
                                         <span class="price">
-                                            from <span class="coret">Rp.400k</span><br />
-                                        <strong>Rp.328k</strong>pp
+                                            Antes <span class="coret">$40.000</span><br />
+                                            <strong>$25.000</strong>Pesos
                                         </span>
                                     </div>
-                                    <a href="#" class="btn btn-def">Check Now</a>
-                                    <a href="#" class="btn btn-info">Get it Now</a>
+                                    <a href="#" class="btn btn-def">Mirar</a>
+                                    <a href="#" class="btn btn-info">Reseñas</a>
                                 </section>
                             </div>
                         </div>
@@ -146,7 +147,7 @@
                                 <img src="libs/homepage/img/route7.png" alt="" />
                                 <section class="detail">
                                     <div class="info">
-                                        <h5>Borobudur Temple <span>Jawa Tengah, Indonesia</span></h5>
+                                       <h5>Hotel Las palmas<span>Cartegena </span></h5>
                                         <div class="star-block">
                                             <span class="icon star"></span>
                                             <span class="icon star"></span>
@@ -155,8 +156,8 @@
                                             <span class="icon star-empty"></span>
                                         </div>
                                         <span class="price">
-                                            from <span class="coret">Rp.400k</span><br />
-                                        <strong>Rp.328k</strong>pp
+                                            Antes <span class="coret">$40.000</span><br />
+                                            <strong>$25.000</strong>Pesos
                                         </span>
                                     </div>
                                 </section>
@@ -167,7 +168,7 @@
                                 <img src="libs/homepage/img/route8.png" alt="" />
                                 <section class="detail">
                                     <div class="info">
-                                        <h5>Borobudur Temple <span>Jawa Tengah, Indonesia</span></h5>
+                                       <h5>Hotel la luna <span>Pasto</span></h5>
                                         <div class="star-block">
                                             <span class="icon star"></span>
                                             <span class="icon star"></span>
@@ -176,8 +177,8 @@
                                             <span class="icon star-empty"></span>
                                         </div>
                                         <span class="price">
-                                            from <span class="coret">Rp.400k</span><br />
-                                        <strong>Rp.328k</strong>pp
+                                             Antes <span class="coret">$40.000</span><br />
+                                            <strong>$25.000</strong>Pesos
                                         </span>
                                     </div>
                                 </section>
