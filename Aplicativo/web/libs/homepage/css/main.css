@@ -1,7 +1,7 @@
 /* css */
 *, ul{padding:0; margin:0; margin-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; padding-left: 0; padding-right: 0; padding-bottom: 0; padding-top: 0}
 li{list-style: none}
-a{color: #34aad7}
+a{color: #00BCD4;}
 a:hover{color: #57C8F2;text-decoration: none}
 @font-face {
   font-family: 'Gotham-ExtraLight';
@@ -528,7 +528,7 @@ a, a:focus, a:active{text-decoration: none; outline: none}
     text-align: center;
     line-height: 140px;
     position: absolute;
-    left: 50%;
+    left: 48%;
     top: -30px;
     border: none;
     padding: 0;
@@ -611,7 +611,7 @@ input.icon-a, select.icon-a, textarea.icon-a{padding-left: 30px !important}
     position: relative;
 }
 .main-promo .separator, .news .separator{width: 9px;height: 235px;background-position: -6px -104px;position: absolute;left: 50%;margin-left: -5px;top: 22px;}
-.icon{background: url('../img/sprite-x.png')no-repeat transparent;display: inline-block} 
+.icon{background: url(../img/sprite-x.png)no-repeat #ff572200;display: inline-block;} 
 .icon.icon-point{width: 52px;height: 52px;background-position: -12px -36px;position: absolute;left: 50%;margin-left: -26px;top: -26px;}
 .main-promo h3{
     font-size: 30px;

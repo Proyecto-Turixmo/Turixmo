@@ -7,8 +7,8 @@
                         </ul>
                         <ul class="pull-right">
                             <li class="user">
-                                <a class="btn btn-link" id="login_btn">Iniciar sesión</a>
-                                <a class="btn btn-danger">Registrate</a>
+                                <a class="btn btn-link" id="login_btn">Registrate</a>
+                                <a class="btn btn-danger">Iniciar sesión</a>
                             </li>
                             <li class="separator"></li>
                           
@@ -21,11 +21,11 @@
                 <div class="main-menu">
                 	<div class="container">
                     	<a href="#" class="cur pull-left">
-                            <span class="text-blue text-big">Los mejores hoteles</span>
-                            A tan solo <strong class="text-blue">un</strong> click
+                            <span class="text-blue text-big">Hoteles</span>
+                            Los hoteles mas economícos a <strong class="text-blue">un</strong> click
                         </a>
                         <a href="#" class="pull-left">
-                            <span class="text-blue text-big">Las mejores habitaciones</span>
+                            <span class="text-blue text-big">Habitaciones</span>
                             Al  <strong class="text-blue">mejor</strong> precio
                         </a>
                         <a class="logo" href="#">
